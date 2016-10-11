@@ -16,5 +16,20 @@ namespace TestReportGenerator
         {
             InitializeComponent();
         }
+
+        private void dtcConfig_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtcDescr_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
