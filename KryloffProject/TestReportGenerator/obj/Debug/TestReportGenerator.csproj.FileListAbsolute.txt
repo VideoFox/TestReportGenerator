@@ -7,3 +7,6 @@ D:\Разработка\MyGit\KryloffProject\TestReportGenerator\obj\Debug\TestR
 D:\Разработка\MyGit\KryloffProject\TestReportGenerator\obj\Debug\TestReportGenerator.csproj.GenerateResource.Cache
 D:\Разработка\MyGit\KryloffProject\TestReportGenerator\obj\Debug\TestReportGenerator.exe
 D:\Разработка\MyGit\KryloffProject\TestReportGenerator\obj\Debug\TestReportGenerator.pdb
+C:\GitHub\KryloffProject\TestReportGenerator\bin\Debug\TestReportGenerator.exe.config
+C:\GitHub\KryloffProject\TestReportGenerator\obj\Debug\TestReportGenerator.exe
+C:\GitHub\KryloffProject\TestReportGenerator\obj\Debug\TestReportGenerator.pdb
