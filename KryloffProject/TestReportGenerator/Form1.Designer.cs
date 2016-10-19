@@ -104,12 +104,13 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simResult = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.dtcConfig.SuspendLayout();
             this.dtcDescr.SuspendLayout();
@@ -131,11 +132,12 @@
             this.tabControl1.Controls.Add(this.txtPatterns);
             this.tabControl1.Controls.Add(this.funcTestConfig);
             this.tabControl1.Controls.Add(this.simResult);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(531, 449);
+            this.tabControl1.Size = new System.Drawing.Size(597, 449);
             this.tabControl1.TabIndex = 0;
             // 
             // dtcConfig
@@ -187,7 +189,7 @@
             this.dtcConfig.Location = new System.Drawing.Point(4, 22);
             this.dtcConfig.Name = "dtcConfig";
             this.dtcConfig.Padding = new System.Windows.Forms.Padding(3);
-            this.dtcConfig.Size = new System.Drawing.Size(523, 423);
+            this.dtcConfig.Size = new System.Drawing.Size(589, 423);
             this.dtcConfig.TabIndex = 0;
             this.dtcConfig.Text = "DTC config";
             this.dtcConfig.Click += new System.EventHandler(this.dtcConfig_Click);
@@ -546,7 +548,7 @@
             this.dtcDescr.Location = new System.Drawing.Point(4, 22);
             this.dtcDescr.Name = "dtcDescr";
             this.dtcDescr.Padding = new System.Windows.Forms.Padding(3);
-            this.dtcDescr.Size = new System.Drawing.Size(523, 423);
+            this.dtcDescr.Size = new System.Drawing.Size(589, 423);
             this.dtcDescr.TabIndex = 1;
             this.dtcDescr.Text = "DTC description";
             this.dtcDescr.Click += new System.EventHandler(this.dtcDescr_Click);
@@ -602,7 +604,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(6, 6);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(514, 377);
+            this.dataGridView1.Size = new System.Drawing.Size(580, 377);
             this.dataGridView1.TabIndex = 0;
             // 
             // Column1
@@ -627,7 +629,7 @@
             this.supplyPins.Controls.Add(this.dataGridView2);
             this.supplyPins.Location = new System.Drawing.Point(4, 22);
             this.supplyPins.Name = "supplyPins";
-            this.supplyPins.Size = new System.Drawing.Size(523, 423);
+            this.supplyPins.Size = new System.Drawing.Size(589, 423);
             this.supplyPins.TabIndex = 2;
             this.supplyPins.Text = "Supply pins";
             // 
@@ -683,7 +685,7 @@
             this.dataGridView2.Location = new System.Drawing.Point(4, 8);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.Size = new System.Drawing.Size(514, 377);
+            this.dataGridView2.Size = new System.Drawing.Size(580, 377);
             this.dataGridView2.TabIndex = 45;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
@@ -714,13 +716,13 @@
             this.txtPatterns.Controls.Add(this.dataGridView3);
             this.txtPatterns.Location = new System.Drawing.Point(4, 22);
             this.txtPatterns.Name = "txtPatterns";
-            this.txtPatterns.Size = new System.Drawing.Size(523, 423);
+            this.txtPatterns.Size = new System.Drawing.Size(589, 423);
             this.txtPatterns.TabIndex = 3;
             this.txtPatterns.Text = "Text patterns";
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(431, 391);
+            this.button11.Location = new System.Drawing.Point(378, 391);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(75, 23);
             this.button11.TabIndex = 49;
@@ -729,7 +731,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(342, 391);
+            this.button12.Location = new System.Drawing.Point(276, 391);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(75, 23);
             this.button12.TabIndex = 48;
@@ -738,7 +740,7 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(110, 391);
+            this.button13.Location = new System.Drawing.Point(173, 391);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(75, 23);
             this.button13.TabIndex = 47;
@@ -747,7 +749,7 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(18, 391);
+            this.button14.Location = new System.Drawing.Point(70, 391);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(75, 23);
             this.button14.TabIndex = 46;
@@ -769,7 +771,7 @@
             this.dataGridView3.Location = new System.Drawing.Point(4, 8);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.Size = new System.Drawing.Size(514, 377);
+            this.dataGridView3.Size = new System.Drawing.Size(580, 377);
             this.dataGridView3.TabIndex = 45;
             // 
             // dataGridViewTextBoxColumn3
@@ -794,7 +796,7 @@
             this.funcTestConfig.Controls.Add(this.dataGridView4);
             this.funcTestConfig.Location = new System.Drawing.Point(4, 22);
             this.funcTestConfig.Name = "funcTestConfig";
-            this.funcTestConfig.Size = new System.Drawing.Size(523, 423);
+            this.funcTestConfig.Size = new System.Drawing.Size(589, 423);
             this.funcTestConfig.TabIndex = 4;
             this.funcTestConfig.Text = "Functional Test Config";
             // 
@@ -849,15 +851,27 @@
             this.dataGridView4.Location = new System.Drawing.Point(4, 4);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.RowHeadersVisible = false;
-            this.dataGridView4.Size = new System.Drawing.Size(514, 377);
+            this.dataGridView4.Size = new System.Drawing.Size(580, 377);
             this.dataGridView4.TabIndex = 46;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Test alias";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Full test name";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 250;
             // 
             // simResult
             // 
             this.simResult.BackColor = System.Drawing.Color.WhiteSmoke;
             this.simResult.Location = new System.Drawing.Point(4, 22);
             this.simResult.Name = "simResult";
-            this.simResult.Size = new System.Drawing.Size(523, 423);
+            this.simResult.Size = new System.Drawing.Size(589, 423);
             this.simResult.TabIndex = 5;
             this.simResult.Text = "Simulation result";
             // 
@@ -868,7 +882,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(531, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(597, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -884,23 +898,21 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // dataGridViewTextBoxColumn5
+            // tabPage1
             // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Test alias";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Full test name";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.Width = 250;
+            this.tabPage1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(589, 423);
+            this.tabPage1.TabIndex = 6;
+            this.tabPage1.Text = "Tester Data";
             // 
             // mForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(531, 473);
+            this.ClientSize = new System.Drawing.Size(597, 473);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1009,6 +1021,7 @@
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.TabPage tabPage1;
     }
 }
 

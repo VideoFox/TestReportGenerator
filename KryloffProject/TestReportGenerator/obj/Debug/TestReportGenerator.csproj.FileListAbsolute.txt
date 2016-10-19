@@ -10,3 +10,6 @@ D:\Разработка\MyGit\KryloffProject\TestReportGenerator\obj\Debug\TestR
 C:\GitHub\KryloffProject\TestReportGenerator\bin\Debug\TestReportGenerator.exe.config
 C:\GitHub\KryloffProject\TestReportGenerator\obj\Debug\TestReportGenerator.exe
 C:\GitHub\KryloffProject\TestReportGenerator\obj\Debug\TestReportGenerator.pdb
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\bin\Debug\TestReportGenerator.exe.config
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\obj\Debug\TestReportGenerator.exe
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\obj\Debug\TestReportGenerator.pdb
