@@ -108,9 +108,15 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simResult = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.button15 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.Col0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -119,10 +125,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.dtcConfig.SuspendLayout();
             this.dtcDescr.SuspendLayout();
@@ -893,6 +896,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tabPage1.Controls.Add(this.progressBar1);
             this.tabPage1.Controls.Add(this.button15);
             this.tabPage1.Controls.Add(this.button20);
             this.tabPage1.Controls.Add(this.dataGridView5);
@@ -903,18 +907,26 @@
             this.tabPage1.TabIndex = 6;
             this.tabPage1.Text = "Tester Data";
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(382, 408);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(178, 23);
+            this.progressBar1.TabIndex = 51;
+            // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(301, 408);
+            this.button15.Location = new System.Drawing.Point(281, 408);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(75, 23);
             this.button15.TabIndex = 50;
             this.button15.Text = "Load";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(198, 408);
+            this.button20.Location = new System.Drawing.Point(178, 408);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(75, 23);
             this.button20.TabIndex = 49;
@@ -923,6 +935,7 @@
             // 
             // dataGridView5
             // 
+            this.dataGridView5.AllowUserToAddRows = false;
             this.dataGridView5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -930,16 +943,47 @@
             this.dataGridView5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn7,
-            this.Column4,
-            this.Column5,
-            this.dataGridViewTextBoxColumn8});
+            this.Col0,
+            this.Col1,
+            this.Col2,
+            this.Col3,
+            this.Col4});
             this.dataGridView5.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dataGridView5.Location = new System.Drawing.Point(3, 3);
             this.dataGridView5.Name = "dataGridView5";
             this.dataGridView5.RowHeadersVisible = false;
             this.dataGridView5.Size = new System.Drawing.Size(564, 399);
             this.dataGridView5.TabIndex = 46;
+            // 
+            // Col0
+            // 
+            this.Col0.HeaderText = "Temperature";
+            this.Col0.Name = "Col0";
+            this.Col0.Width = 80;
+            // 
+            // Col1
+            // 
+            this.Col1.HeaderText = "Die";
+            this.Col1.Name = "Col1";
+            this.Col1.Width = 80;
+            // 
+            // Col2
+            // 
+            this.Col2.HeaderText = "Parameter";
+            this.Col2.Name = "Col2";
+            this.Col2.Width = 160;
+            // 
+            // Col3
+            // 
+            this.Col3.HeaderText = "Voltage";
+            this.Col3.Name = "Col3";
+            this.Col3.Width = 120;
+            // 
+            // Col4
+            // 
+            this.Col4.HeaderText = "Value";
+            this.Col4.Name = "Col4";
+            this.Col4.Width = 120;
             // 
             // menuStrip1
             // 
@@ -967,30 +1011,31 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(109, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // aboutToolStripMenuItem
@@ -999,29 +1044,9 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // dataGridViewTextBoxColumn7
+            // openFileDialog1
             // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Die";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.Width = 130;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Parameter";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 160;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Voltage";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 135;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Value";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.Width = 135;
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // mForm
             // 
@@ -1147,10 +1172,13 @@
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.DataGridView dataGridView5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col0;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col4;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 
