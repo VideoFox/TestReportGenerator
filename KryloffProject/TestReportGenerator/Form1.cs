@@ -13,9 +13,20 @@ namespace TestReportGenerator
 {
     public partial class mForm : Form
     {
+        // Имя сохраненного файла
+        string nameFile = "";
+        // Диалог сохранения
+        Stream myStream;
+        SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
         public mForm()
         {
             InitializeComponent();
+
+            saveFileDialog1.Filter = "rgf files (*.rgf)|*.rgf|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+
         }
 
         private void dtcConfig_Click(object sender, EventArgs e)
@@ -47,7 +58,7 @@ namespace TestReportGenerator
             {
                 InitialDirectory = "D:\\",
                 Filter = @"txt files (*.txt)|*.txt|All files (*.*)|*.*",
-                FilterIndex = 2,
+                FilterIndex = 1,
                 RestoreDirectory = true
             };
 
@@ -88,38 +99,161 @@ namespace TestReportGenerator
             foreach (var item in arrayString)
             {
                 progressBar1.Value += 1;
-                dataGridView5.Rows.Add(item[0], item[1], item[2], item[3], item[4]);
+
+                try
+                {
+                    dataGridView5.Rows.Add(item[0], item[1], item[2], item[3], item[4]);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(@"Ошибка при загрузке данных! Возможно, неверный формат файла! " + ex);
+                    return;
+                }
+
             }
             progressBar1.Value = 1;
         }
-
+        /// <summary>
+        /// ОТкрыть сохранение
+        /// </summary>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Stream myStream = null;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            List<XMLrec> ents=new List<XMLrec>();
 
             openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.Filter = "rgf files (*.rgf)|*.rgf|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    if ((myStream = openFileDialog1.OpenFile()) != null)
-                    {
-                        using (myStream)
-                        {
-                            // Insert code to read the stream here.
-                        }
-                    }
+                    nameFile = openFileDialog1.FileName;
+                    ents = ClassLibrary.ReadXML(nameFile, "TextReportGenerator", "TextReportGeneratorData");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                    MessageBox.Show("Ошибка при загрузке данных! Возможно, неверный формат файла! " + ex.Message);
                 }
             }
+
+            if (ents.Count!=0)
+            {
+                ;
+            }
+        }
+        /// <summary>
+        /// Сохранить
+        /// </summary>
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (nameFile == "")
+            {
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    nameFile = saveFileDialog1.FileName;
+                }
+            }
+            ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayTitle());
+            if(dataGridView1.RowCount>1)
+             ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView1, "DTCdescription"));
+            if (dataGridView2.RowCount > 1)
+                ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView2, "SupplyPins"));
+            if (dataGridView3.RowCount > 1)
+                ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView3, "TextPatterns"));
+            if (dataGridView4.RowCount > 1)
+                ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView4, "FunctionalTestConfig"));
+
+
+
+        }
+        /// <summary>
+        /// Метод формирования массива данных
+        /// </summary>
+        /// <returns></returns>
+        XMLrec[] BuildDataArrayTitle()
+        {
+            // Проверка на наличие файла настроек
+            ClassLibrary.createXML(nameFile, "TextReportGenerator");
+            XMLrec[] entries = {
+                // Запись размеров окна
+                new XMLrec("","Title","",null),
+                new XMLrec("Title","ChipID", tbox1.Text ,null),
+                new XMLrec("Title","MWPID", tbox2.Text ,null),
+                new XMLrec("Title","BatchID", tbox3.Text ,null),
+                new XMLrec("Title","LotID", tbox4.Text ,null),
+                new XMLrec("Title","Process", tbox5.Text ,null),
+                new XMLrec("Title","IOlib", tbox6.Text ,null),
+                new XMLrec("Title","CoreLib", tbox7.Text ,null),
+                new XMLrec("Title","Temperature", tbox8.Text ,null),
+                new XMLrec("Title","Pacaging", tbox9.Text ,null),
+                new XMLrec("Title","Type", tbox10.Text ,null),
+                new XMLrec("Title","WaferNo", tbox11.Text ,null),
+                new XMLrec("Title","NumberOfDies", tbox12.Text ,null),
+                new XMLrec("Title","Author", tbox13.Text ,null),
+                new XMLrec("Title","Measurement", tbox14.Text ,null),
+                new XMLrec("Title","Date", tbox15.Text ,null),
+                new XMLrec("Title","Version", tbox16.Text ,null),
+                new XMLrec("Title","VDD_IO-1", tbox17.Text ,null),
+                new XMLrec("Title","VDD_IO-2", tbox18.Text ,null),
+                new XMLrec("Title","VDD_IO-3", tbox19.Text ,null),
+                new XMLrec("Title","VDD_Core-1", tbox20.Text ,null),
+                new XMLrec("Title","VDD_Core-2", tbox21.Text ,null),
+                new XMLrec("Title","VDD_Core-3", tbox22.Text ,null)
+            };
+            return entries;
+        }
+
+        XMLrec[] BuildDataArrayGrid(DataGridView dataGridView ,string titleNode )
+        {
+            if (dataGridView.RowCount > 1)
+            {
+                List<string> arrayList = new List<string>();
+                for (int i = 0; i < dataGridView.RowCount; i++)
+                {
+                    arrayList.Add(dataGridView[0,i].Value as string);
+                    arrayList.Add(dataGridView[1, i].Value as string);
+                }
+                XMLrec[] entries = new XMLrec[arrayList.Count];
+                entries[0] = new XMLrec("", titleNode, "", null);
+
+                for (int i = 1; i < arrayList.Count; i++)
+                {
+                    entries[i] = new XMLrec(titleNode, titleNode + "_" + i.ToString(), arrayList[i - 1], null);
+                }
+                return entries;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Сохранить как
+        /// </summary>
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                nameFile = saveFileDialog1.FileName;
+            }
+            ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayTitle());
+            if (dataGridView1.RowCount > 1)
+                ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView1, "DTCdescription"));
+            if (dataGridView2.RowCount > 1)
+                ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView2, "SupplyPins"));
+            if (dataGridView3.RowCount > 1)
+                ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView3, "TextPatterns"));
+            if (dataGridView4.RowCount > 1)
+                ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView4, "FunctionalTestConfig"));
+
+        }
+        /// <summary>
+        /// Выход
+        /// </summary>
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
