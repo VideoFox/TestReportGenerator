@@ -16,7 +16,6 @@ namespace TestReportGenerator
         // Имя сохраненного файла
         string nameFile = "";
         // Диалог сохранения
-        Stream myStream;
         SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
         public mForm()
@@ -138,11 +137,6 @@ namespace TestReportGenerator
                     MessageBox.Show("Ошибка при загрузке данных! Возможно, неверный формат файла! " + ex.Message);
                 }
             }
-
-            if (ents.Count!=0)
-            {
-                ;
-            }
         }
         /// <summary>
         /// Сохранить
@@ -254,6 +248,18 @@ namespace TestReportGenerator
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+           for (int i = 0; i < 3; i++)
+            {
+                dataGridView6.Rows.Add();
+            }
+
+
+
+
         }
     }
 }
