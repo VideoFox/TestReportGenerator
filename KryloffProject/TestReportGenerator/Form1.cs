@@ -159,8 +159,8 @@ namespace TestReportGenerator
                 ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView3, "TextPatterns"));
             if (dataGridView4.RowCount > 1)
                 ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView4, "FunctionalTestConfig"));
-
-
+            if (dataGridView6.RowCount > 1)
+                ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView6, "SimulationResult"));
 
         }
         /// <summary>
@@ -240,6 +240,8 @@ namespace TestReportGenerator
                 ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView3, "TextPatterns"));
             if (dataGridView4.RowCount > 1)
                 ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView4, "FunctionalTestConfig"));
+            if (dataGridView6.RowCount > 1)
+                ClassLibrary.WriteXML(nameFile, "TextReportGenerator", "TextReportGeneratorData", BuildDataArrayGrid(dataGridView6, "SimulationResult"));
 
         }
         /// <summary>
