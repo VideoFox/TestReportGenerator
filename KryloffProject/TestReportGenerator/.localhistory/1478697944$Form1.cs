@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TestReportGenerator
@@ -10,13 +16,13 @@ namespace TestReportGenerator
         // Имя сохраненного файла
         string nameFile = "";
         // Диалог сохранения
-        readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+        SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
         public mForm()
         {
             InitializeComponent();
 
-            saveFileDialog1.Filter = @"rgf files (*.rgf)|*.rgf|All files (*.*)|*.*";
+            saveFileDialog1.Filter = "rgf files (*.rgf)|*.rgf|All files (*.*)|*.*";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
 
@@ -37,6 +43,10 @@ namespace TestReportGenerator
 
         }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
         /// <summary>
         /// Загрузка данных с тестера
         /// </summary>
@@ -107,19 +117,19 @@ namespace TestReportGenerator
         /// </summary>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
             List<XMLrec> ents = new List<XMLrec>();
 
-            fileDialog.InitialDirectory = "c:\\";
-            fileDialog.Filter = @"rgf files (*.rgf)|*.rgf|All files (*.*)|*.*";
-            fileDialog.FilterIndex = 1;
-            fileDialog.RestoreDirectory = true;
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = "rgf files (*.rgf)|*.rgf|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
 
-            if (fileDialog.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    nameFile = fileDialog.FileName;
+                    nameFile = openFileDialog1.FileName;
                     ents = ClassLibrary.ReadXML(nameFile, "TextReportGenerator", "TextReportGeneratorData");
                 }
                 catch (Exception ex)
@@ -199,18 +209,19 @@ namespace TestReportGenerator
                 {
                     for (int j = 0; j < dataGridView.ColumnCount; j++)
                     {
+
                         if (dataGridView[j, i].Value == null)
                             arrayList.Add("");
                         else
                             arrayList.Add(dataGridView[j, i].Value as string);
                     }
                 }
-                XMLrec[] entries = new XMLrec[arrayList.Count+1];
+                XMLrec[] entries = new XMLrec[arrayList.Count];
                 entries[0] = new XMLrec("", titleNode, "", null);
 
-                for (int i = 1; i <= arrayList.Count; i++)
+                for (int i = 0; i < arrayList.Count; i++)
                 {
-                    entries[i] = new XMLrec(titleNode, titleNode + "_" + i, arrayList[i - 1], null);
+                    entries[i] = new XMLrec(titleNode, titleNode + "_" + i, arrayList[i], null);
                 }
                 return entries;
             }

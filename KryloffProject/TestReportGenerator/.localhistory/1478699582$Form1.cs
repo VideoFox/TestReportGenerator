@@ -10,7 +10,7 @@ namespace TestReportGenerator
         // Имя сохраненного файла
         string nameFile = "";
         // Диалог сохранения
-        readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+        SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
         public mForm()
         {
