@@ -15,26 +15,9 @@ namespace TestReportGenerator
         public mForm()
         {
             InitializeComponent();
-
             saveFileDialog1.Filter = @"rgf files (*.rgf)|*.rgf|All files (*.*)|*.*";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
-
-        }
-
-        private void dtcConfig_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtcDescr_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         /// <summary>
@@ -205,7 +188,7 @@ namespace TestReportGenerator
                             arrayList.Add(dataGridView[j, i].Value as string);
                     }
                 }
-                XMLrec[] entries = new XMLrec[arrayList.Count+1];
+                XMLrec[] entries = new XMLrec[arrayList.Count + 1];
                 entries[0] = new XMLrec("", titleNode, "", null);
 
                 for (int i = 1; i <= arrayList.Count; i++)
@@ -246,17 +229,197 @@ namespace TestReportGenerator
         {
             Close();
         }
-
+        /// <summary>
+        /// Очистка первой страницы
+        /// </summary>
+        private void button17_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(@"Очистить поля?",
+                                         @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                tbox1.Text = "";
+                tbox2.Text = "";
+                tbox3.Text = "";
+                tbox4.Text = "";
+                tbox5.Text = "";
+                tbox6.Text = "";
+                tbox7.Text = "";
+                tbox8.Text = "";
+                tbox9.Text = "";
+                tbox10.Text = "";
+                tbox11.Text = "";
+                tbox12.Text = "";
+                tbox13.Text = "";
+                tbox14.Text = "";
+                tbox15.Text = "";
+                tbox16.Text = "";
+                tbox17.Text = "";
+                tbox18.Text = "";
+                tbox19.Text = "";
+                tbox20.Text = "";
+                tbox21.Text = "";
+                tbox22.Text = "";
+            }
+        }
+        #region Очистка таблиц
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(@"Очистить все строки?",
+                                 @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                    {
+                        dataGridView1[j, i].Value = "";
+                    }
+                }
+            }
+        }
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(@"Очистить все строки?",
+                     @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                for (int i = 0; i < dataGridView2.RowCount; i++)
+                {
+                    for (int j = 0; j < dataGridView2.ColumnCount; j++)
+                    {
+                        dataGridView2[j, i].Value = "";
+                    }
+                }
+            }
+        }
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(@"Очистить все строки?",
+                     @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                for (int i = 0; i < dataGridView3.RowCount; i++)
+                {
+                    for (int j = 0; j < dataGridView3.ColumnCount; j++)
+                    {
+                        dataGridView3[j, i].Value = "";
+                    }
+                }
+            }
+        }
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(@"Очистить все строки?",
+                     @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                for (int i = 0; i < dataGridView4.RowCount; i++)
+                {
+                    for (int j = 0; j < dataGridView4.ColumnCount; j++)
+                    {
+                        dataGridView4[j, i].Value = "";
+                    }
+                }
+            }
+        }
+        private void button18_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(@"Очистить все строки?",
+                     @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                for (int i = 0; i < dataGridView6.RowCount; i++)
+                {
+                    for (int j = 0; j < dataGridView6.ColumnCount; j++)
+                    {
+                        dataGridView6[j, i].Value = "";
+                    }
+                }
+            }
+        }
+        #endregion
+        #region Добавить строку в таблицу
+        private void button5_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Add();
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < 3; i++)
             {
                 dataGridView6.Rows.Add();
             }
-
-
-
-
         }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            dataGridView2.Rows.Add();
+        }
+        private void button10_Click(object sender, EventArgs e)
+        {
+            dataGridView3.Rows.Add();
+        }
+        private void button13_Click(object sender, EventArgs e)
+        {
+            dataGridView4.Rows.Add();
+        }
+        #endregion
+        #region Удаление строк
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                if (MessageBox.Show(@"Удалить строку?",
+                             @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    int i = dataGridView1.CurrentRow.Index;
+                    dataGridView1.Rows.RemoveAt(i);
+                }
+            }
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.CurrentRow != null)
+            {
+                if (MessageBox.Show(@"Удалить строку?",
+                             @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    int i = dataGridView2.CurrentRow.Index;
+                    dataGridView2.Rows.RemoveAt(i);
+                }
+            }
+        }
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (dataGridView3.CurrentRow != null)
+            {
+                if (MessageBox.Show(@"Удалить строку?",
+                             @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    int i = dataGridView3.CurrentRow.Index;
+                    dataGridView3.Rows.RemoveAt(i);
+                }
+            }
+        }
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (dataGridView4.CurrentRow != null)
+            {
+                if (MessageBox.Show(@"Удалить строку?",
+                             @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    int i = dataGridView4.CurrentRow.Index;
+                    dataGridView4.Rows.RemoveAt(i);
+                }
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dataGridView6.CurrentRow != null)
+            {
+                if (MessageBox.Show(@"Удалить строку?",
+                             @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    int i = dataGridView6.CurrentRow.Index;
+                    dataGridView6.Rows.RemoveAt(i);
+                }
+            }
+        }
+        #endregion
+
     }
 }
