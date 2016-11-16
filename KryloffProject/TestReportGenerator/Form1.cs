@@ -109,7 +109,84 @@ namespace TestReportGenerator
                 {
                     MessageBox.Show(@"Ошибка при загрузке данных! Возможно, неверный формат файла! " + ex.Message);
                 }
+
+                // Заполнение полей
+                if (ents.Count != 0)
+                {
+                    List<XMLrec> dtcDescription = new List<XMLrec>();
+                    List<XMLrec> supplyPins = new List<XMLrec>();
+                    List<XMLrec> textPatterns = new List<XMLrec>();
+                    List<XMLrec> funcTestConfigig = new List<XMLrec>();
+                    List<XMLrec> simulResult = new List<XMLrec>();
+
+                    foreach (XMLrec item in ents)
+                    {
+                        #region Заполнение Title
+                        if (item.nameElement == "ChipID") tbox1.Text = item.textElement;
+                        if (item.nameElement == "MWPID") tbox2.Text = item.textElement;
+                        if (item.nameElement == "BatchID") tbox3.Text = item.textElement;
+                        if (item.nameElement == "LotID") tbox4.Text = item.textElement;
+                        if (item.nameElement == "Process") tbox5.Text = item.textElement;
+                        if (item.nameElement == "IOlib") tbox6.Text = item.textElement;
+                        if (item.nameElement == "CoreLib") tbox7.Text = item.textElement;
+
+                        if (item.nameElement == "Temperature") tbox8.Text = item.textElement;
+                        if (item.nameElement == "Pacaging") tbox9.Text = item.textElement;
+                        if (item.nameElement == "Type") tbox10.Text = item.textElement;
+                        if (item.nameElement == "WaferNo") tbox11.Text = item.textElement;
+                        if (item.nameElement == "NumberOfDies") tbox12.Text = item.textElement;
+                        if (item.nameElement == "Author") tbox13.Text = item.textElement;
+                        if (item.nameElement == "Measurement") tbox14.Text = item.textElement;
+                        if (item.nameElement == "Date") tbox15.Text = item.textElement;
+                        if (item.nameElement == "Version") tbox16.Text = item.textElement;
+
+                        if (item.nameElement == "VDD_IO-1") tbox17.Text = item.textElement;
+                        if (item.nameElement == "VDD_IO-2") tbox18.Text = item.textElement;
+                        if (item.nameElement == "VDD_IO-3") tbox19.Text = item.textElement;
+                        if (item.nameElement == "VDD_Core-1") tbox20.Text = item.textElement;
+                        if (item.nameElement == "VDD_Core-2") tbox21.Text = item.textElement;
+                        if (item.nameElement == "VDD_Core-3") tbox22.Text = item.textElement;
+                        #endregion
+
+                        // Массивы данных таблиц
+                        if (item.nameElement.Contains("DTCdescription"))
+                        {
+                            dtcDescription.Add(item);
+                        }
+                        if (item.nameElement.Contains("SupplyPins"))
+                        {
+                            supplyPins.Add(item);
+                        }
+                    }
+
+                    // Сортировка данных таблиц
+                    if (dtcDescription.Count != 0)
+                    {
+                        int j = 0;
+                        for (int i = 0; i < dtcDescription.Count/2; i++)
+                        {
+                            dataGridView1.Rows.Add(dtcDescription[j].textElement, dtcDescription[j+1].textElement);
+                            j += 2;
+                        }
+                    }
+
+                    if (supplyPins.Count != 0)
+                    {
+                        int j = 0;
+                        for (int i = 0; i < supplyPins.Count / 3; i++)
+                        {
+                            dataGridView2.Rows.Add(supplyPins[j].textElement, supplyPins[j + 1].textElement,
+                                                   supplyPins[j + 2].textElement);
+                            j += 3;
+                        }
+                    }
+
+
+
+                }
             }
+
+
         }
         /// <summary>
         /// Сохранить
@@ -264,70 +341,85 @@ namespace TestReportGenerator
         #region Очистка таблиц
         private void button3_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(@"Очистить все строки?",
-                                 @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (dataGridView1.CurrentRow != null)
             {
-                for (int i = 0; i < dataGridView1.RowCount; i++)
+                if (MessageBox.Show(@"Очистить все строки?",
+                    @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                    for (int i = 0; i < dataGridView1.RowCount; i++)
                     {
-                        dataGridView1[j, i].Value = "";
+                        for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                        {
+                            dataGridView1[j, i].Value = "";
+                        }
                     }
                 }
             }
         }
         private void button8_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(@"Очистить все строки?",
-                     @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (dataGridView2.CurrentRow != null)
             {
-                for (int i = 0; i < dataGridView2.RowCount; i++)
+                if (MessageBox.Show(@"Очистить все строки?",
+                    @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    for (int j = 0; j < dataGridView2.ColumnCount; j++)
+                    for (int i = 0; i < dataGridView2.RowCount; i++)
                     {
-                        dataGridView2[j, i].Value = "";
+                        for (int j = 0; j < dataGridView2.ColumnCount; j++)
+                        {
+                            dataGridView2[j, i].Value = "";
+                        }
                     }
                 }
             }
         }
         private void button11_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(@"Очистить все строки?",
-                     @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (dataGridView3.CurrentRow != null)
             {
-                for (int i = 0; i < dataGridView3.RowCount; i++)
+                if (MessageBox.Show(@"Очистить все строки?",
+                    @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    for (int j = 0; j < dataGridView3.ColumnCount; j++)
+                    for (int i = 0; i < dataGridView3.RowCount; i++)
                     {
-                        dataGridView3[j, i].Value = "";
+                        for (int j = 0; j < dataGridView3.ColumnCount; j++)
+                        {
+                            dataGridView3[j, i].Value = "";
+                        }
                     }
                 }
             }
         }
         private void button14_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(@"Очистить все строки?",
-                     @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (dataGridView4.CurrentRow != null)
             {
-                for (int i = 0; i < dataGridView4.RowCount; i++)
+                if (MessageBox.Show(@"Очистить все строки?",
+                    @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    for (int j = 0; j < dataGridView4.ColumnCount; j++)
+                    for (int i = 0; i < dataGridView4.RowCount; i++)
                     {
-                        dataGridView4[j, i].Value = "";
+                        for (int j = 0; j < dataGridView4.ColumnCount; j++)
+                        {
+                            dataGridView4[j, i].Value = "";
+                        }
                     }
                 }
             }
         }
         private void button18_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(@"Очистить все строки?",
-                     @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (dataGridView6.CurrentRow != null)
             {
-                for (int i = 0; i < dataGridView6.RowCount; i++)
+                if (MessageBox.Show(@"Очистить все строки?",
+                    @"Подтверждение удаления", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    for (int j = 0; j < dataGridView6.ColumnCount; j++)
+                    for (int i = 0; i < dataGridView6.RowCount; i++)
                     {
-                        dataGridView6[j, i].Value = "";
+                        for (int j = 0; j < dataGridView6.ColumnCount; j++)
+                        {
+                            dataGridView6[j, i].Value = "";
+                        }
                     }
                 }
             }
