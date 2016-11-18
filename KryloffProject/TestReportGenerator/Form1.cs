@@ -114,7 +114,7 @@ namespace TestReportGenerator
                 if (ents.Count != 0)
                 {
                     List<XMLrec> dtcDescription = new List<XMLrec>();
-                    List<XMLrec> supplyPins = new List<XMLrec>();
+                    List<XMLrec> pins = new List<XMLrec>();
                     List<XMLrec> textPatterns = new List<XMLrec>();
                     List<XMLrec> funcTestConfigig = new List<XMLrec>();
                     List<XMLrec> simulResult = new List<XMLrec>();
@@ -155,7 +155,19 @@ namespace TestReportGenerator
                         }
                         if (item.nameElement.Contains("SupplyPins"))
                         {
-                            supplyPins.Add(item);
+                            pins.Add(item);
+                        }
+                        if (item.nameElement.Contains("TextPatterns"))
+                        {
+                            textPatterns.Add(item);
+                        }
+                        if (item.nameElement.Contains("FunctionalTestConfig"))
+                        {
+                            funcTestConfigig.Add(item);
+                        }
+                        if (item.nameElement.Contains("SimulationResult"))
+                        {
+                            simulResult.Add(item);
                         }
                     }
 
@@ -170,19 +182,47 @@ namespace TestReportGenerator
                         }
                     }
 
-                    if (supplyPins.Count != 0)
+                    if (pins.Count != 0)
                     {
                         int j = 0;
-                        for (int i = 0; i < supplyPins.Count / 3; i++)
+                        for (int i = 0; i < pins.Count / 3; i++)
                         {
-                            dataGridView2.Rows.Add(supplyPins[j].textElement, supplyPins[j + 1].textElement,
-                                                   supplyPins[j + 2].textElement);
+                            dataGridView2.Rows.Add(pins[j].textElement, pins[j + 1].textElement,
+                                                   pins[j + 2].textElement);
                             j += 3;
                         }
                     }
 
+                    if (textPatterns.Count != 0)
+                    {
+                        int j = 0;
+                        for (int i = 0; i < textPatterns.Count / 2; i++)
+                        {
+                            dataGridView3.Rows.Add(textPatterns[j].textElement, textPatterns[j + 1].textElement);
+                            j += 2;
+                        }
+                    }
+                    if (funcTestConfigig.Count != 0)
+                    {
+                        int j = 0;
+                        for (int i = 0; i < funcTestConfigig.Count / 2; i++)
+                        {
+                            dataGridView4.Rows.Add(funcTestConfigig[j].textElement, funcTestConfigig[j + 1].textElement);
+                            j += 2;
+                        }
+                    }
 
-
+                    if (simulResult.Count != 0)
+                    {
+                        int j = 0;
+                        for (int i = 0; i < simulResult.Count / 4; i++)
+                        {
+                            dataGridView6.Rows.Add(simulResult[j].textElement, simulResult[j + 1].textElement,
+                                                   simulResult[j + 2].textElement, simulResult[j + 3].textElement);
+                            j += 4;
+                        }
+                    }
+                    
                 }
             }
 
@@ -513,5 +553,10 @@ namespace TestReportGenerator
         }
         #endregion
 
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 about=new AboutBox1();
+            about.ShowDialog(this);
+        }
     }
 }
