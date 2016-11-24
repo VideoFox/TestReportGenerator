@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace TestReportGenerator
@@ -175,9 +177,9 @@ namespace TestReportGenerator
                     if (dtcDescription.Count != 0)
                     {
                         int j = 0;
-                        for (int i = 0; i < dtcDescription.Count/2; i++)
+                        for (int i = 0; i < dtcDescription.Count / 2; i++)
                         {
-                            dataGridView1.Rows.Add(dtcDescription[j].textElement, dtcDescription[j+1].textElement);
+                            dataGridView1.Rows.Add(dtcDescription[j].textElement, dtcDescription[j + 1].textElement);
                             j += 2;
                         }
                     }
@@ -222,7 +224,7 @@ namespace TestReportGenerator
                             j += 4;
                         }
                     }
-                    
+
                 }
             }
 
@@ -555,8 +557,63 @@ namespace TestReportGenerator
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutBox1 about=new AboutBox1();
+            AboutBox1 about = new AboutBox1();
             about.ShowDialog(this);
+        }
+
+        private void reportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Путь для сохранения отчета по умолчанию
+            string programFiles = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            using (var folderDialog = new FolderBrowserDialog())
+            {
+                folderDialog.SelectedPath = programFiles;
+                if (folderDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Список файлов отчета
+                    string[] fileNames ={"title.tex", "config.tex", "legends_and_colors.tex", "main.tex","preamble.tex"};
+                    // Путь для новой папки
+                    string nameNewFolder = folderDialog.SelectedPath + "\\" + DateTime.Now.ToString("yyyy_MM_dd_hh.m.s");
+                    Directory.CreateDirectory(nameNewFolder);
+                    // Копирование файлов отчета в новую папку
+                    foreach (var item in fileNames)
+                    {
+                        string sourceFile = Path.Combine(Application.StartupPath+"\\tex_templates", item);
+                        string destFile = Path.Combine(nameNewFolder, item);
+                        File.Copy(sourceFile, destFile, true);
+                    }
+
+                    // Заполнение титульного файла
+                    StreamReader reader = new StreamReader(nameNewFolder+ "\\title.tex");
+                    string content = reader.ReadToEnd();
+                    reader.Close();
+
+                    content = Regex.Replace(content, @"\\CHIPID", tbox1.Text);
+                    content = Regex.Replace(content, @"\\MPWID", tbox2.Text);
+                    content = Regex.Replace(content, @"\\BATCHID", tbox3.Text);
+                    content = Regex.Replace(content, @"\\LOTID", tbox4.Text);
+                    content = Regex.Replace(content, @"\\PROCESS", tbox5.Text);
+                    content = Regex.Replace(content, @"\\IOLIBRARY", tbox6.Text);
+                    content = Regex.Replace(content, @"\\CORELIBRARY", tbox7.Text);
+                    content = Regex.Replace(content, @"\\PACKAGING", tbox9.Text);
+                    content = Regex.Replace(content, @"\\TESTTYPE", tbox10.Text);
+                    content = Regex.Replace(content, @"\\WAFERNO", tbox11.Text);
+
+                    content = Regex.Replace(content, @"\\DIES", tbox12.Text);
+                    content = Regex.Replace(content, @"\\AUTHOR", tbox13.Text);
+                    content = Regex.Replace(content, @"\\MEASURED", tbox14.Text);
+
+                    content = Regex.Replace(content, @"\\today", tbox15.Text);
+                    content = Regex.Replace(content, @"\\version", tbox16.Text);
+
+
+                    StreamWriter writer = new StreamWriter(nameNewFolder + "\\title.tex");
+                    writer.Write(content);
+                    writer.Close();
+
+
+                }
+            }
         }
     }
 }

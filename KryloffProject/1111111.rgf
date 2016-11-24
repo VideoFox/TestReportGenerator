@@ -39,9 +39,38 @@
       <SupplyPins_4>4444</SupplyPins_4>
       <SupplyPins_5>5555</SupplyPins_5>
       <SupplyPins_6>6666</SupplyPins_6>
-      <SupplyPins_7>7777</SupplyPins_7>
-      <SupplyPins_8>8888</SupplyPins_8>
-      <SupplyPins_9>9999</SupplyPins_9>
     </SupplyPins>
+    <TextPatterns>
+      <TextPatterns_1>кен</TextPatterns_1>
+      <TextPatterns_2>кенкенкен</TextPatterns_2>
+      <TextPatterns_3>олнгшнгш</TextPatterns_3>
+      <TextPatterns_4>нгшнгшнгшнгш</TextPatterns_4>
+      <TextPatterns_5>нгшнгпртпро</TextPatterns_5>
+      <TextPatterns_6>апрапрапрапр</TextPatterns_6>
+    </TextPatterns>
+    <FunctionalTestConfig>
+      <FunctionalTestConfig_1>456456456</FunctionalTestConfig_1>
+      <FunctionalTestConfig_2>7867867867876</FunctionalTestConfig_2>
+      <FunctionalTestConfig_3>678678</FunctionalTestConfig_3>
+      <FunctionalTestConfig_4>гшщгшщгшщгшщ</FunctionalTestConfig_4>
+      <FunctionalTestConfig_5>67867867867</FunctionalTestConfig_5>
+      <FunctionalTestConfig_6>789789</FunctionalTestConfig_6>
+    </FunctionalTestConfig>
+    <SimulationResult>
+      <SimulationResult_1>768</SimulationResult_1>
+      <SimulationResult_2>678678</SimulationResult_2>
+      <SimulationResult_3>678678</SimulationResult_3>
+      <SimulationResult_4>678678</SimulationResult_4>
+      <SimulationResult_5>
+      </SimulationResult_5>
+      <SimulationResult_6>890890890</SimulationResult_6>
+      <SimulationResult_7>890890</SimulationResult_7>
+      <SimulationResult_8>890890</SimulationResult_8>
+      <SimulationResult_9>
+      </SimulationResult_9>
+      <SimulationResult_10>890890</SimulationResult_10>
+      <SimulationResult_11>890890</SimulationResult_11>
+      <SimulationResult_12>890890</SimulationResult_12>
+    </SimulationResult>
   </TextReportGeneratorData>
 </TextReportGenerator>

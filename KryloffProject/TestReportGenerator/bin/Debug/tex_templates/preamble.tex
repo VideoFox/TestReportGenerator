@@ -1,0 +1,141 @@
+\documentclass [12pt, a4paper]{report}
+\usepackage[left=2cm, right=2cm, top=2.5cm, bottom=3.5cm, bindingoffset=0cm]{geometry}
+\usepackage[english]{babel}
+\usepackage{fontspec} 
+\setmainfont{Arial}
+\usepackage{float}
+\usepackage{caption}
+\captionsetup[table]{position=above,justification=raggedright}
+%\captionsetup[figure]{}
+\usepackage{tikz}
+\usepgflibrary{fpu}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.5}
+
+\usepackage{amssymb}
+\usepackage{titlesec} %настройка шрифтов оглавлений
+
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+
+\setlength{\arrayrulewidth}{1pt}%установка ширины линий таблиц
+
+\usepackage{color,colortbl}
+\usepackage{color,xcolor}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\extrarowheight = 2pt %добавление пространства под верхней линейкой таблицы
+
+
+\usepackage{graphicx}
+\usepackage{multirow}%для возможности объединения строк в таблицах
+
+\usetikzlibrary{plotmarks}
+
+\usepackage[ddmmyyyy]{datetime}
+\renewcommand{\dateseparator}{.} 
+
+\usepackage{textcomp} %для добавления знака копирайта
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\usepackage{lastpage}
+
+\usepackage{ragged2e}
+\newcommand{\jj}{\righthyphenmin=20 \justifying} %команда для выравнивания текста по ширине
+
+
+\headheight = 103pt
+\headsep = 8pt
+\footskip = 1cm
+%\textheight = 21.5cm
+\textheight = 22.5cm
+\fancyhf{}  % убираем текущие установки для колонтитулов
+\renewcommand{\headrulewidth}{0.0pt}
+\fancyhead[C]{
+\begin{tabularx}{\textwidth}{|>{\raggedright}X|l|l|}
+\multicolumn{3}{l}{\large{\TECH\ \MOS\ \CHIPID\ DTC Test Report ~---\ \version ~---\ \today}} \\
+\hline
+Chip ID: \CHIPID & MPW ID: \MPWID & Wafer No.: \WAFERNO \\
+\hline
+Batch ID: \BATCHID & Lot ID: \LOTID & Dies: \DIES \\
+\hline 
+\multicolumn{2}{|l|}{Core lib.: \CORELIBRARY} & IO lib.: \IOLIBRARY \\
+\hline
+\multicolumn{3}{|l|}{Process: \PROCESS} \\
+\hline
+\end{tabularx}
+}
+\fancyfoot[C]{\footnotesize \thepage /\footnotesize \pageref{LastPage}}
+\fancyfoot[L]{\footnotesize{\today \ \textcopyright \  X-FAB Semiconductor Foundries}}
+\fancyfoot[R]{\footnotesize{\version}}
+
+
+\fancypagestyle{plain}{
+\fancyhf{}  % убираем текущие установки для колонтитулов
+\renewcommand{\headrulewidth}{0.0pt}
+\fancyhead[C]{
+\begin{tabularx}{\textwidth}{|>{\raggedright}X|l|l|}
+\multicolumn{3}{l}{\large{\TECH\ \MOS\ \CHIPID\ DTC Test Report ~---\ \version ~---\ \today}} \\
+\hline
+Chip ID: \CHIPID & MPW ID: \MPWID & Wafer No.: \WAFERNO \\
+\hline
+Batch ID: \BATCHID & Lot ID: \LOTID & Dies: \DIES \\
+\hline 
+\multicolumn{2}{|l|}{Core lib.: \CORELIBRARY} & IO lib.: \IOLIBRARY \\
+\hline
+\multicolumn{3}{|l|}{Process: \PROCESS} \\
+\hline
+\end{tabularx}
+}
+\fancyfoot[C]{\footnotesize \thepage /\footnotesize \pageref{LastPage}}
+\fancyfoot[L]{\footnotesize{\today \ \textcopyright \  X-FAB Semiconductor Foundries}}
+\fancyfoot[R]{\footnotesize{\version}}
+}
+
+\usepackage{etoc}
+\renewcommand{\etocaftertitlehook}{\pagestyle{plain}}
+\renewcommand{\etocaftertochook}{\thispagestyle{plain}}
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+
+\usepackage{titletoc}
+\usepackage[hidelinks, breaklinks]{hyperref} 
+\usepackage{tocloft} 
+\dottedcontents{chapter}[1.6em]{}{1.6em}{1pc}
+%Изменение стиля страницы с оглавлением.%%%%%%%%%%%%%%%
+\setlength{\cftbeforetoctitleskip}{0pt} % отступ перед оглавлением
+\setlength{\cftaftertoctitleskip}{0pt} % отступ после оглавления
+
+%Оформление вывода заголовков Chapter%%%%%%%%%%%%%%
+\makeatletter
+\def\thickhrulefill{\leavevmode \leaders \hrule height 1ex \hfill \kern \z@}
+\def\@makechapterhead#1{%
+  {\parindent \z@ 
+        \reset@font\Large\bfseries
+        \begin{tabular}{p{6mm}p{25cm}}
+          {\thechapter{}}
+          &
+          \Large #1
+        \end{tabular}
+        \par\nobreak
+    \vskip 10\p@ %расстояние от названия главы до текста
+  }}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%для выравнивания названий таблиц по левому краю%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\@maketablecaption}[2]{
+    \vskip\abovecaptionskip
+    \sbox\@tempboxa{#1 --- #2}%
+    \ifdim \wd\@tempboxa >\hsize
+        #1 --- #2\par
+    \else
+        \global \@minipageFailse
+        \hb@xt@\hsize{\box\@tempboxa}%
+    \fi
+    \vskip\belowcaptionskip}
+\renewcommand{\table}{\let\@makecaption\@maketablecaption\@float{table}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

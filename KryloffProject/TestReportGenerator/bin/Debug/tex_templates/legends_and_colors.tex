@@ -1,0 +1,43 @@
+% COLORS
+
+\definecolor{darkishgreen}{RGB}{39,203,22}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\definecolor{Gray}{gray}{0.9}
+\definecolor{lightRed}{RGB}{230,170,150}
+\definecolor{modRed}{RGB}{230,82,90}
+\definecolor{Red}{RGB}{230,6,6}
+\definecolor{Green}{RGB}{0,255,0}
+\definecolor{darkGreen}{RGB}{0,192,0}
+\definecolor{BIN0}{RGB}{0,192,0}
+\definecolor{BIN1}{RGB}{0,255,0}
+\definecolor{BIN2}{RGB}{255,255,0}
+\definecolor{BIN3}{RGB}{224,160,0}
+\definecolor{BIN4}{RGB}{224,96,0}
+\definecolor{BIN5}{RGB}{255,0,0}
+\definecolor{NoData}{RGB}{192,192,192}
+
+
+% LEGENDS
+\newcommand{\ratelegend}{VDD=\VDD V; VDIO=\VDIO V; T=+25$^{\circ}$C; Rate=1000ns}  
+\newcommand{\ratelegendret}{VDIG=\VDD V; VDIO=\VDIO V; T=+25$^{\circ}$C; Rate=1000ns}  
+\newcommand{\ratepercentlegend}{VDD=\VDD V $\pm$ 10\%; VDIO=\VDIO V; T=+25$^{\circ}$C; Rate=1000ns}  
+\newcommand{\noratelegend}{VDD=\VDD V; VDIO=\VDIO V; T=+25$^{\circ}$C}  
+\newcommand{\vworklegend}{VDIO=\VDIO V; T=+25$^{\circ}$C; Rate=1000ns}  
+\newcommand{\dataretlegend}{VDIG=\VDD V; VDIO=\VDIO V; T=+25$^{\circ}$C; Rate=1000ns} 
+\newcommand{\ramgndlegend}{VDD=\VDD V; VDIO=\VDIO V; T=+25$^{\circ}$C; Rate=1000ns} 
+
+% - Легенда для Data retention wafer map%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\mylegendret}{\scriptsize{$\square$ Bad contact \ \ \textcolor{Red}{$\blacksquare$} Functional FAIL \ \ \textcolor{Green}{$\blacksquare$}     
+Functional PASS, VRAM: OK ~\\ \textcolor{BIN4}{$\blacksquare$} Functional PASS, VRAM>Simulated value}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% - Легенда для IDDQ wafer map%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\myIDDQlegend}{\scriptsize{$\square$ Bad contact \ \ \textcolor{BIN0}{$\blacksquare$}     
+IDDQ<TM \textcolor{BIN1}{$\blacksquare$} TM<IDDQ<WP \\ \textcolor{BIN2}{$\blacksquare$} WP<IDDQ<10*WP \ \ \textcolor{BIN3}{$\blacksquare$} 10*WP<IDDQ<100*WP 
+\\ \textcolor{BIN4}{$\blacksquare$} 100*WP<IDDQ<1000*WP  \ \ \textcolor{BIN5}{$\blacksquare$} IDDQ>1000*WP}}
+
+% - Легенда для wafer map%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\mylegend}{\scriptsize{$\square$ Data test FAIL \ \ \textcolor{Green}{$\blacksquare$}     
+Functional PASS \ \ \textcolor{Red}{$\blacksquare$} Functional FAIL}}
+% LEGENDS
+
