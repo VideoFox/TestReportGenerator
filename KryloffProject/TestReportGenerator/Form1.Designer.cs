@@ -131,6 +131,8 @@
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label20 = new System.Windows.Forms.Label();
+            this.tbox23 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.dtcConfig.SuspendLayout();
             this.dtcDescr.SuspendLayout();
@@ -167,6 +169,8 @@
             // dtcConfig
             // 
             this.dtcConfig.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.dtcConfig.Controls.Add(this.label20);
+            this.dtcConfig.Controls.Add(this.tbox23);
             this.dtcConfig.Controls.Add(this.button17);
             this.dtcConfig.Controls.Add(this.label19);
             this.dtcConfig.Controls.Add(this.tbox8);
@@ -229,7 +233,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(147, 294);
+            this.label19.Location = new System.Drawing.Point(20, 294);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(67, 13);
             this.label19.TabIndex = 42;
@@ -237,9 +241,9 @@
             // 
             // tbox8
             // 
-            this.tbox8.Location = new System.Drawing.Point(110, 310);
+            this.tbox8.Location = new System.Drawing.Point(20, 310);
             this.tbox8.Name = "tbox8";
-            this.tbox8.Size = new System.Drawing.Size(151, 20);
+            this.tbox8.Size = new System.Drawing.Size(106, 20);
             this.tbox8.TabIndex = 41;
             // 
             // tbox22
@@ -305,7 +309,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(351, 294);
+            this.label16.Location = new System.Drawing.Point(129, 293);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(42, 13);
             this.label16.TabIndex = 30;
@@ -313,9 +317,9 @@
             // 
             // tbox16
             // 
-            this.tbox16.Location = new System.Drawing.Point(297, 310);
+            this.tbox16.Location = new System.Drawing.Point(132, 310);
             this.tbox16.Name = "tbox16";
-            this.tbox16.Size = new System.Drawing.Size(151, 20);
+            this.tbox16.Size = new System.Drawing.Size(130, 20);
             this.tbox16.TabIndex = 29;
             // 
             // label9
@@ -1107,6 +1111,22 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(295, 297);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(32, 13);
+            this.label20.TabIndex = 47;
+            this.label20.Text = "Email";
+            // 
+            // tbox23
+            // 
+            this.tbox23.Location = new System.Drawing.Point(298, 314);
+            this.tbox23.Name = "tbox23";
+            this.tbox23.Size = new System.Drawing.Size(242, 20);
+            this.tbox23.TabIndex = 46;
+            // 
             // mForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1244,6 +1264,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox tbox23;
     }
 }
 

@@ -142,6 +142,8 @@ namespace TestReportGenerator
                         if (item.nameElement == "Date") tbox15.Text = item.textElement;
                         if (item.nameElement == "Version") tbox16.Text = item.textElement;
 
+                        if (item.nameElement == "Email") tbox23.Text = item.textElement;
+
                         if (item.nameElement == "VDD_IO-1") tbox17.Text = item.textElement;
                         if (item.nameElement == "VDD_IO-2") tbox18.Text = item.textElement;
                         if (item.nameElement == "VDD_IO-3") tbox19.Text = item.textElement;
@@ -282,12 +284,14 @@ namespace TestReportGenerator
                 new XMLrec("Title","Measurement", tbox14.Text ,null),
                 new XMLrec("Title","Date", tbox15.Text ,null),
                 new XMLrec("Title","Version", tbox16.Text ,null),
+                new XMLrec("Title","Email", tbox23.Text ,null),
                 new XMLrec("Title","VDD_IO-1", tbox17.Text ,null),
                 new XMLrec("Title","VDD_IO-2", tbox18.Text ,null),
                 new XMLrec("Title","VDD_IO-3", tbox19.Text ,null),
                 new XMLrec("Title","VDD_Core-1", tbox20.Text ,null),
                 new XMLrec("Title","VDD_Core-2", tbox21.Text ,null),
                 new XMLrec("Title","VDD_Core-3", tbox22.Text ,null)
+
             };
             return entries;
         }
@@ -378,6 +382,7 @@ namespace TestReportGenerator
                 tbox20.Text = "";
                 tbox21.Text = "";
                 tbox22.Text = "";
+                tbox23.Text = "";
             }
         }
         #region Очистка таблиц
@@ -602,6 +607,7 @@ namespace TestReportGenerator
                     content = Regex.Replace(content, @"\\DIES", tbox12.Text);
                     content = Regex.Replace(content, @"\\AUTHOR", tbox13.Text);
                     content = Regex.Replace(content, @"\\MEASURED", tbox14.Text);
+                    content = Regex.Replace(content, @"\\EMAIL", tbox23.Text);
 
                     content = Regex.Replace(content, @"\\today", tbox15.Text);
                     content = Regex.Replace(content, @"\\version", tbox16.Text);
