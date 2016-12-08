@@ -84,7 +84,7 @@
             this.labelProductName.Name = "labelProductName";
             this.labelProductName.Size = new System.Drawing.Size(286, 17);
             this.labelProductName.TabIndex = 19;
-            this.labelProductName.Text = "Генератор отчетов (специально для Крылова А.В.)";
+            this.labelProductName.Text = "Генератор отчетов (специально для Крылова А.А.)";
             this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelProductName.Click += new System.EventHandler(this.labelProductName_Click);
             // 

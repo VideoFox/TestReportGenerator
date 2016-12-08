@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+// ReSharper disable All
 
 namespace TestReportGenerator
 {
@@ -131,7 +133,6 @@ namespace TestReportGenerator
         /// <param name="xmlPath">XML файл</param>
         /// <param name="mainNodeName">Главная нода(специальность)</param>
         /// <param name="parentNodeName">Нода программы</param>
-
         public static List<XMLrec> ReadXML(string xmlPath, string mainNodeName, string parentNodeName)
         {
             // Список данных на вывод
@@ -171,9 +172,7 @@ namespace TestReportGenerator
             // Возврат массива значений
             return entries;
         }
-
     }
-
     public class XMLrec
     {
         public string nameElement;
@@ -188,10 +187,8 @@ namespace TestReportGenerator
             this.nodePath = nodePath;
         }
     }
-
     public class GroupByGrid : DataGridView
     {
-
         protected override void OnCellFormatting(DataGridViewCellFormattingEventArgs args)
         {
             base.OnCellFormatting(args);
@@ -204,7 +201,6 @@ namespace TestReportGenerator
                 args.FormattingApplied = true;
             }
         }
-
         private bool IsRepeatedCellValue(int rowIndex, int colIndex)
         {
             DataGridViewCell currCell = Rows[rowIndex].Cells[colIndex];
@@ -212,7 +208,6 @@ namespace TestReportGenerator
             return ((currCell.Value == prevCell.Value) || (currCell.Value != null && prevCell.Value != null &&
                 currCell.Value.ToString() == prevCell.Value.ToString()));
         }
-
         protected override void OnCellPainting(DataGridViewCellPaintingEventArgs args)
         {
             base.OnCellPainting(args);
@@ -223,6 +218,68 @@ namespace TestReportGenerator
                 args.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.None;
             else
                 args.AdvancedBorderStyle.Top = AdvancedCellBorderStyle.Top;
+        }
+    }
+    public static class FileService
+    {
+        /// <summary>
+        /// Копирование файлов шаблона
+        /// </summary>
+        /// <param name="pathFolder">Папка с шаблонами</param>
+        /// <returns>Возвращает путь к новой папке</returns>
+        public static string CopyTemplate(string pathFolder)
+        {
+            // Список файлов отчета
+            string[] fileNames = { "title.tex", "config.tex", "legends_and_colors.tex", "main.tex", "preamble.tex" };
+            // Путь для новой папки
+            string nameNewFolder = pathFolder + "\\" + DateTime.Now.ToString("yyyy_MM_dd_hh.m.s");
+            Directory.CreateDirectory(nameNewFolder);
+            // Копирование файлов отчета в новую папку
+            foreach (var item in fileNames)
+            {
+                string sourceFile = Path.Combine(Application.StartupPath + "\\tex_templates", item);
+                string destFile = Path.Combine(nameNewFolder, item);
+                File.Copy(sourceFile, destFile, true);
+            }
+            return nameNewFolder;
+        }
+        /// <summary>
+        /// Считывание Тех и Мос
+        /// </summary>
+        /// <param name="nameNewFolder">Путь к папке</param>
+        /// <param name="techMosString">Тип процесса</param>
+        /// <param name="strFromTitle">Строка из Тайтла</param>
+        /// <returns>Возвращает считанный тип процесса</returns>
+        public static string TechMosRead(string nameNewFolder, string techMosString, string strFromTitle)
+        {
+            // Считывание шаблонов TECH и MOS
+            StreamReader reader = new StreamReader(nameNewFolder + "\\legends_and_colors.tex");
+            string content = reader.ReadToEnd();
+            reader.Close();
+
+            string strTech = content.Substring(content.IndexOf("%"+ techMosString) + techMosString.Length+1, 
+                                               content.IndexOf("%END"+ techMosString) - techMosString.Length + 1);
+            strTech = Regex.Replace(strTech, @"\r\n", "");
+            strTech = Regex.Replace(strTech, @"%", "");
+            string[] arrayStringTech = strTech.Split(' ');
+
+            bool flagTech = false;
+            string techString = "";
+            foreach (string item in arrayStringTech)
+            {
+                if (item != "" && strFromTitle.IndexOf(item) != -1)
+                {
+                    flagTech = true;
+                    techString = item;
+                }
+            }
+
+            if (!flagTech)
+            {
+                MessageBox.Show(techMosString+@" не определен! Проверьте входные данные!");
+                techString = "???";
+            }
+            return techString;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace TestReportGenerator
         {
             InitializeComponent();
             this.Text = String.Format("О программе {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct+@" (Специально для Крылова А.В.)";
+            this.labelProductName.Text = AssemblyProduct+@" (Специально для Крылова А.A.)";
             this.labelVersion.Text = String.Format("Версия {0}", AssemblyVersion);
             this.labelCopyright.Text = @"Авторские права - отсутствуют(ломайте как хотите)";
             this.textBoxDescription.Text = @"Супер программа имени 3-го обхвата 2-й березы для расчета каких-то цифорок.";

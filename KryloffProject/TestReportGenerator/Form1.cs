@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+// ReSharper disable All
 
 namespace TestReportGenerator
 {
@@ -11,6 +12,17 @@ namespace TestReportGenerator
     {
         // Имя сохраненного файла
         string nameFile = "";
+        // Массив данных с тестера
+        public static List<string[]> arrayString = new List<string[]>();
+        // Коллекция из отсортированных коллекций из тестердаты
+        public static List<List<string[]>> testerSortCollections = new List<List<string[]>>();
+        // Коллекция алиасов
+        public static List<string> textAliases = new List<string>();
+        // VDD core
+        public static string VDDcore1;
+        public static string VDDcore2;
+        public static string VDDcore3;
+
         // Диалог сохранения
         readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
@@ -36,7 +48,6 @@ namespace TestReportGenerator
                 RestoreDirectory = true
             };
 
-            List<string[]> arrayString = new List<string[]>();
 
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
             try
@@ -123,6 +134,7 @@ namespace TestReportGenerator
 
                     foreach (XMLrec item in ents)
                     {
+
                         #region Заполнение Title
                         if (item.nameElement == "ChipID") tbox1.Text = item.textElement;
                         if (item.nameElement == "MWPID") tbox2.Text = item.textElement;
@@ -189,11 +201,13 @@ namespace TestReportGenerator
                     if (pins.Count != 0)
                     {
                         int j = 0;
-                        for (int i = 0; i < pins.Count / 3; i++)
+                        for (int i = 0; i < pins.Count / 4; i++)
                         {
-                            dataGridView2.Rows.Add(pins[j].textElement, pins[j + 1].textElement,
-                                                   pins[j + 2].textElement);
-                            j += 3;
+                            dataGridView2.Rows.Add(pins[j].textElement,
+                                                   pins[j + 1].textElement,
+                                                   pins[j + 2].textElement,
+                                                   pins[j + 3].textElement);
+                            j += 4;
                         }
                     }
 
@@ -266,7 +280,6 @@ namespace TestReportGenerator
             // Проверка на наличие файла настроек
             ClassLibrary.createXML(nameFile, "TextReportGenerator");
             XMLrec[] entries = {
-                // Запись размеров окна
                 new XMLrec("","Title","",null),
                 new XMLrec("Title","ChipID", tbox1.Text ,null),
                 new XMLrec("Title","MWPID", tbox2.Text ,null),
@@ -290,12 +303,13 @@ namespace TestReportGenerator
                 new XMLrec("Title","VDD_IO-3", tbox19.Text ,null),
                 new XMLrec("Title","VDD_Core-1", tbox20.Text ,null),
                 new XMLrec("Title","VDD_Core-2", tbox21.Text ,null),
-                new XMLrec("Title","VDD_Core-3", tbox22.Text ,null)
+                new XMLrec("Title","VDD_Core-3", tbox22.Text ,null),
+               new XMLrec("","Path","",null),
+               new XMLrec("Path","LastFile", nameFile ,null)
 
             };
             return entries;
         }
-
         XMLrec[] BuildDataArrayGrid(DataGridView dataGridView, string titleNode)
         {
             if (dataGridView.RowCount > 1)
@@ -322,7 +336,6 @@ namespace TestReportGenerator
             }
             return null;
         }
-
         /// <summary>
         /// Сохранить как
         /// </summary>
@@ -500,6 +513,9 @@ namespace TestReportGenerator
         #region Удаление строк
         private void button6_Click(object sender, EventArgs e)
         {
+
+            //    MessageBox.Show(dataGridView1.Rows[0].Cells[0].Value.ToString());
+
             if (dataGridView1.CurrentRow != null)
             {
                 if (MessageBox.Show(@"Удалить строку?",
@@ -559,7 +575,6 @@ namespace TestReportGenerator
             }
         }
         #endregion
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox1 about = new AboutBox1();
@@ -575,51 +590,184 @@ namespace TestReportGenerator
                 folderDialog.SelectedPath = programFiles;
                 if (folderDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Список файлов отчета
-                    string[] fileNames ={"title.tex", "config.tex", "legends_and_colors.tex", "main.tex","preamble.tex"};
-                    // Путь для новой папки
-                    string nameNewFolder = folderDialog.SelectedPath + "\\" + DateTime.Now.ToString("yyyy_MM_dd_hh.m.s");
-                    Directory.CreateDirectory(nameNewFolder);
                     // Копирование файлов отчета в новую папку
-                    foreach (var item in fileNames)
-                    {
-                        string sourceFile = Path.Combine(Application.StartupPath+"\\tex_templates", item);
-                        string destFile = Path.Combine(nameNewFolder, item);
-                        File.Copy(sourceFile, destFile, true);
-                    }
+                    string nameNewFolder = FileService.CopyTemplate(folderDialog.SelectedPath);
 
-                    // Заполнение титульного файла
-                    StreamReader reader = new StreamReader(nameNewFolder+ "\\title.tex");
+                    // Считывание шаблонов TECH и MOS
+                    string techString = "";
+                    techString = FileService.TechMosRead(nameNewFolder, "TECH", tbox5.Text);
+                    string mosString = "";
+                    mosString = FileService.TechMosRead(nameNewFolder, "MOS", tbox5.Text);
+
+
+                    // Заполнение config
+                    StreamReader readerConfig = new StreamReader(nameNewFolder + "\\config.tex");
+                    string contentConfig = readerConfig.ReadToEnd();
+                    readerConfig.Close();
+
+                    if (!string.IsNullOrEmpty(techString))
+                        contentConfig = contentConfig.Replace("$Tech$", techString);
+                    if (!string.IsNullOrEmpty(mosString))
+                        contentConfig = contentConfig.Replace("$MOS$", mosString);
+
+                    contentConfig = contentConfig.Replace("$ChipID$", tbox1.Text);
+                    contentConfig = contentConfig.Replace("$MPWID$", tbox2.Text);
+                    contentConfig = contentConfig.Replace("$BatchID$", tbox3.Text);
+                    contentConfig = contentConfig.Replace("$LotID$", tbox4.Text);
+                    contentConfig = contentConfig.Replace("$Process$", tbox5.Text);
+                    contentConfig = contentConfig.Replace("$IOLib$", tbox6.Text);
+                    contentConfig = contentConfig.Replace("$CoreLib$", tbox7.Text);
+                    contentConfig = contentConfig.Replace("$Packaging$", tbox9.Text);
+                    contentConfig = contentConfig.Replace("$TestType$", tbox10.Text);
+                    contentConfig = contentConfig.Replace("$Wafer$", tbox11.Text);
+                    contentConfig = contentConfig.Replace("$Dies$", tbox12.Text);
+                    contentConfig = contentConfig.Replace("$Author$", tbox13.Text);
+                    contentConfig = contentConfig.Replace("$Measured$", tbox14.Text);
+                    contentConfig = contentConfig.Replace("$Email$", tbox23.Text);
+                    contentConfig = contentConfig.Replace("$Version$", tbox16.Text);
+
+                    StreamWriter writerConfig = new StreamWriter(nameNewFolder + "\\config.tex");
+                    writerConfig.Write(contentConfig);
+                    writerConfig.Close();
+
+
+
+                    // Заполнение DTC description
+                    StreamReader reader = new StreamReader(nameNewFolder + "\\main.tex");
                     string content = reader.ReadToEnd();
                     reader.Close();
 
-                    content = Regex.Replace(content, @"\\CHIPID", tbox1.Text);
-                    content = Regex.Replace(content, @"\\MPWID", tbox2.Text);
-                    content = Regex.Replace(content, @"\\BATCHID", tbox3.Text);
-                    content = Regex.Replace(content, @"\\LOTID", tbox4.Text);
-                    content = Regex.Replace(content, @"\\PROCESS", tbox5.Text);
-                    content = Regex.Replace(content, @"\\IOLIBRARY", tbox6.Text);
-                    content = Regex.Replace(content, @"\\CORELIBRARY", tbox7.Text);
-                    content = Regex.Replace(content, @"\\PACKAGING", tbox9.Text);
-                    content = Regex.Replace(content, @"\\TESTTYPE", tbox10.Text);
-                    content = Regex.Replace(content, @"\\WAFERNO", tbox11.Text);
+                    string startString = "%Start DTC description";
+                    int dtcStart = content.IndexOf(startString) + startString.Length;
+                    if (dataGridView1.RowCount != 0)
+                    {
+                        for (int i = dataGridView1.RowCount - 1; i >= 0; i--)
+                        {
+                            content = content.Insert(dtcStart, "\n\\item " + dataGridView1.Rows[i].Cells[0].Value.ToString() + " "
+                                                                           + dataGridView1.Rows[i].Cells[1].Value.ToString());
+                        }
+                    }
+                    // Заполнение тест паттерна
+                    startString = "%Start test patterns";
+                    dtcStart = content.IndexOf(startString) + startString.Length;
+                    if (dataGridView3.RowCount != 0)
+                    {
+                        for (int i = dataGridView3.RowCount - 1; i >= 0; i--)
+                        {
+                            content = content.Insert(dtcStart, "\n\\item " + dataGridView3.Rows[i].Cells[0].Value.ToString() + " "
+                                                                           + dataGridView3.Rows[i].Cells[1].Value.ToString());
+                        }
+                    }
+                    // Заполнение supply pins
+                    startString = "%Start supply pins";
+                    dtcStart = content.IndexOf(startString) + startString.Length;
+                    if (dataGridView2.RowCount != 0)
+                    {
+                        for (int i = dataGridView2.RowCount - 1; i >= 0; i--)
+                        {
+                            content = content.Insert(dtcStart, "\n" + dataGridView2.Rows[i].Cells[1].Value.ToString() + " & \\" +
+                                                                      dataGridView2.Rows[i].Cells[0].Value.ToString() + " & " +
+                                                                      dataGridView2.Rows[i].Cells[3].Value.ToString()
+                                                                       + @" \\ \hline");
+                        }
+                    }
 
-                    content = Regex.Replace(content, @"\\DIES", tbox12.Text);
-                    content = Regex.Replace(content, @"\\AUTHOR", tbox13.Text);
-                    content = Regex.Replace(content, @"\\MEASURED", tbox14.Text);
-                    content = Regex.Replace(content, @"\\EMAIL", tbox23.Text);
-
-                    content = Regex.Replace(content, @"\\today", tbox15.Text);
-                    content = Regex.Replace(content, @"\\version", tbox16.Text);
+                    writerConfig = new StreamWriter(nameNewFolder + "\\main.tex");
+                    writerConfig.Write(content);
+                    writerConfig.Close();
 
 
-                    StreamWriter writer = new StreamWriter(nameNewFolder + "\\title.tex");
-                    writer.Write(content);
-                    writer.Close();
+                    // Заполнение supply pins в Config.tex
+                    reader = new StreamReader(nameNewFolder + "\\config.tex");
+                    content = reader.ReadToEnd();
+                    reader.Close();
 
+                    startString = "%Start supply pins";
+                    dtcStart = content.IndexOf(startString) + startString.Length;
+                    if (dataGridView2.RowCount != 0)
+                    {
+                        for (int i = dataGridView2.RowCount - 1; i >= 0; i--)
+                        {
+                            content = content.Insert(dtcStart, "\n" + @"\newcommand{" +
+                                                               dataGridView2.Rows[i].Cells[0].Value.ToString() + "}{" +
+                                                               dataGridView2.Rows[i].Cells[2].Value.ToString() + "}");
+                        }
+                    }
+
+                    writerConfig = new StreamWriter(nameNewFolder + "\\config.tex");
+                    writerConfig.Write(content);
+                    writerConfig.Close();
 
                 }
             }
+        }
+
+        /// <summary>
+        /// Формирование и сортировка ланных с тестера и тесталиасов
+        /// </summary>
+        private void funcCulcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            testerSortCollections.Clear();
+            textAliases.Clear();
+            // Составление коллекции по тесталиасам
+            if (arrayString.Count != 0)
+            {
+                if (dataGridView4.RowCount != 0)
+                {
+                    for (int i = 0; i < dataGridView4.RowCount; i++)
+                    {
+                        textAliases.Add(dataGridView4.Rows[i].Cells[0].Value.ToString());
+                    }
+                    foreach (var item in textAliases)
+                    {
+                        List<string[]> tempList = new List<string[]>();
+                        foreach (var testerItem in arrayString)
+                        {
+                            if (item == testerItem[2])
+                            {
+                                string[] tmpArray = { testerItem[0], testerItem[1], testerItem[2], testerItem[3], testerItem[4] };
+                                tempList.Add(tmpArray);
+                            }
+                        }
+                        if (tempList.Count != 0)
+                        {
+                            testerSortCollections.Add(tempList);
+                        }
+                        tempList = new List<string[]>();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Данные с тестера не загружены!");
+                return;
+            }
+
+            // Проверка на правильность VDD core
+            VDDcore1 = tbox20.Text;
+            VDDcore2 = tbox21.Text;
+            VDDcore3 = tbox22.Text;
+            double res;
+            if (!double.TryParse(VDDcore1, out res))
+            {
+                MessageBox.Show("Неверный формат VDDcore1");
+                return;
+            }
+            if (!double.TryParse(VDDcore2, out res))
+            {
+                MessageBox.Show("Неверный формат VDDcore2");
+                return;
+            }
+            if (!double.TryParse(VDDcore3, out res))
+            {
+                MessageBox.Show("Неверный формат VDDcore3");
+                return;
+            }
+            // Форма с таблицей
+            FuncCalc funcCalc = new FuncCalc();
+            funcCalc.ShowDialog();
+
+
         }
     }
 }
