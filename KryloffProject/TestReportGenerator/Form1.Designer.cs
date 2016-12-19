@@ -91,6 +91,7 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.txtPatterns = new System.Windows.Forms.TabPage();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
@@ -103,8 +104,6 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simResult = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -132,9 +131,12 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.funcCulcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.funcCulcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.dtcConfig.SuspendLayout();
             this.dtcDescr.SuspendLayout();
@@ -705,7 +707,8 @@
             this.Column4,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
-            this.Column3});
+            this.Column3,
+            this.Column8});
             this.dataGridView2.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dataGridView2.Location = new System.Drawing.Point(4, 8);
             this.dataGridView2.MultiSelect = false;
@@ -729,13 +732,18 @@
             // 
             this.dataGridViewTextBoxColumn2.HeaderText = "Supply name";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 180;
+            this.dataGridViewTextBoxColumn2.Width = 140;
             // 
             // Column3
             // 
             this.Column3.HeaderText = "Description";
             this.Column3.Name = "Column3";
-            this.Column3.Width = 200;
+            this.Column3.Width = 130;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "Type";
+            this.Column8.Name = "Column8";
             // 
             // txtPatterns
             // 
@@ -865,25 +873,14 @@
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6});
+            this.dataGridViewTextBoxColumn6,
+            this.Column9});
             this.dataGridView4.GridColor = System.Drawing.SystemColors.ButtonShadow;
             this.dataGridView4.Location = new System.Drawing.Point(4, 4);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.RowHeadersVisible = false;
             this.dataGridView4.Size = new System.Drawing.Size(561, 393);
             this.dataGridView4.TabIndex = 46;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Test alias";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Full test name";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.Width = 250;
             // 
             // simResult
             // 
@@ -1126,6 +1123,13 @@
             this.reportToolStripMenuItem.Text = "Report";
             this.reportToolStripMenuItem.Click += new System.EventHandler(this.reportToolStripMenuItem_Click);
             // 
+            // funcCulcToolStripMenuItem
+            // 
+            this.funcCulcToolStripMenuItem.Name = "funcCulcToolStripMenuItem";
+            this.funcCulcToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.funcCulcToolStripMenuItem.Text = "FuncCalc";
+            this.funcCulcToolStripMenuItem.Click += new System.EventHandler(this.funcCulcToolStripMenuItem_Click);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
@@ -1137,12 +1141,22 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // funcCulcToolStripMenuItem
+            // dataGridViewTextBoxColumn5
             // 
-            this.funcCulcToolStripMenuItem.Name = "funcCulcToolStripMenuItem";
-            this.funcCulcToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.funcCulcToolStripMenuItem.Text = "FuncCalc";
-            this.funcCulcToolStripMenuItem.Click += new System.EventHandler(this.funcCulcToolStripMenuItem_Click);
+            this.dataGridViewTextBoxColumn5.HeaderText = "Test alias";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 220;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Full test name";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 220;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "Levels";
+            this.Column9.Name = "Column9";
             // 
             // mForm
             // 
@@ -1239,8 +1253,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridView dataGridView4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
@@ -1280,11 +1292,15 @@
         private System.Windows.Forms.TextBox tbox23;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.ToolStripMenuItem funcCulcToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.ToolStripMenuItem funcCulcToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
     }
 }
 

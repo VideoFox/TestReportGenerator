@@ -1,0 +1,98 @@
+<TextReportGenerator>
+  <TextReportGeneratorData>
+    <Title>
+      <ChipID>CHIIIP IDDDDD</ChipID>
+      <MWPID>2</MWPID>
+      <BatchID>3</BatchID>
+      <LotID>4</LotID>
+      <Process>5 rty rtyrty xp018 </Process>
+      <IOlib>6</IOlib>
+      <CoreLib>7</CoreLib>
+      <Temperature>15</Temperature>
+      <Pacaging>8</Pacaging>
+      <Type>9</Type>
+      <WaferNo>10</WaferNo>
+      <NumberOfDies>11</NumberOfDies>
+      <Author>12</Author>
+      <Measurement>13</Measurement>
+      <Date>14</Date>
+      <Version>16</Version>
+      <Email>ttt@fffff</Email>
+      <VDD_IO-1>17</VDD_IO-1>
+      <VDD_IO-2>18</VDD_IO-2>
+      <VDD_IO-3>19</VDD_IO-3>
+      <VDD_Core-1>1,62</VDD_Core-1>
+      <VDD_Core-2>1,8</VDD_Core-2>
+      <VDD_Core-3>1,98</VDD_Core-3>
+    </Title>
+    <Path>
+      <LastFile>D:\2222222.rgf</LastFile>
+    </Path>
+    <DTCdescription>
+      <DTCdescription_1>111</DTCdescription_1>
+      <DTCdescription_2>112</DTCdescription_2>
+      <DTCdescription_3>113</DTCdescription_3>
+      <DTCdescription_4>114</DTCdescription_4>
+      <DTCdescription_5>115</DTCdescription_5>
+      <DTCdescription_6>116</DTCdescription_6>
+    </DTCdescription>
+    <SupplyPins>
+      <SupplyPins_1>1111</SupplyPins_1>
+      <SupplyPins_2>2222</SupplyPins_2>
+      <SupplyPins_3>3333</SupplyPins_3>
+      <SupplyPins_4>1111</SupplyPins_4>
+      <SupplyPins_5>4444</SupplyPins_5>
+      <SupplyPins_6>5555</SupplyPins_6>
+      <SupplyPins_7>6666</SupplyPins_7>
+      <SupplyPins_8>477777</SupplyPins_8>
+      <SupplyPins_9>
+      </SupplyPins_9>
+      <SupplyPins_10>
+      </SupplyPins_10>
+      <SupplyPins_11>
+      </SupplyPins_11>
+      <SupplyPins_12>
+      </SupplyPins_12>
+    </SupplyPins>
+    <TextPatterns>
+      <TextPatterns_1>кен</TextPatterns_1>
+      <TextPatterns_2>кенкенкен</TextPatterns_2>
+      <TextPatterns_3>олнгшнгш</TextPatterns_3>
+      <TextPatterns_4>нгшнгшнгшнгш</TextPatterns_4>
+      <TextPatterns_5>нгшнгпртпро</TextPatterns_5>
+      <TextPatterns_6>апрапрапрапр</TextPatterns_6>
+    </TextPatterns>
+    <FunctionalTestConfig>
+      <FunctionalTestConfig_1>IOTEST</FunctionalTestConfig_1>
+      <FunctionalTestConfig_2>IO_TEST_Bya</FunctionalTestConfig_2>
+      <FunctionalTestConfig_3>NANDTREE</FunctionalTestConfig_3>
+      <FunctionalTestConfig_4>NANDTREE_RRRRR</FunctionalTestConfig_4>
+      <FunctionalTestConfig_5>DPRAM4KX64DATA</FunctionalTestConfig_5>
+      <FunctionalTestConfig_6>DPRAM4KX64DATA dghdghdgh</FunctionalTestConfig_6>
+      <FunctionalTestConfig_7>DPRAM4KX64MARCHC</FunctionalTestConfig_7>
+      <FunctionalTestConfig_8>DPRAM4KX64MARCHC dfgdfg</FunctionalTestConfig_8>
+      <FunctionalTestConfig_9>DPRAM4KX64RETFUNK</FunctionalTestConfig_9>
+      <FunctionalTestConfig_10>DPRAM4KX64RET hsdghdgh</FunctionalTestConfig_10>
+      <FunctionalTestConfig_11>ROM8KX64DATA</FunctionalTestConfig_11>
+      <FunctionalTestConfig_12>ROM8KX64DATA ghfgh</FunctionalTestConfig_12>
+      <FunctionalTestConfig_13>ROM8KX64READ</FunctionalTestConfig_13>
+      <FunctionalTestConfig_14>ROM8KX64READ fnfhnf</FunctionalTestConfig_14>
+    </FunctionalTestConfig>
+    <SimulationResult>
+      <SimulationResult_1>768</SimulationResult_1>
+      <SimulationResult_2>678678</SimulationResult_2>
+      <SimulationResult_3>678678</SimulationResult_3>
+      <SimulationResult_4>678678</SimulationResult_4>
+      <SimulationResult_5>
+      </SimulationResult_5>
+      <SimulationResult_6>890890890</SimulationResult_6>
+      <SimulationResult_7>890890</SimulationResult_7>
+      <SimulationResult_8>890890</SimulationResult_8>
+      <SimulationResult_9>
+      </SimulationResult_9>
+      <SimulationResult_10>890890</SimulationResult_10>
+      <SimulationResult_11>890890</SimulationResult_11>
+      <SimulationResult_12>890890</SimulationResult_12>
+    </SimulationResult>
+  </TextReportGeneratorData>
+</TextReportGenerator>

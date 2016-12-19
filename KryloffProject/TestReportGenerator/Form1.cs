@@ -32,6 +32,14 @@ namespace TestReportGenerator
             saveFileDialog1.Filter = @"rgf files (*.rgf)|*.rgf|All files (*.*)|*.*";
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
+            DataGridViewComboBoxColumn cmb = (DataGridViewComboBoxColumn) dataGridView2.Columns[4];
+            cmb.Items.Add("IO");
+            cmb.Items.Add("Core");
+            cmb.Items.Add("Memory");
+            cmb.FlatStyle = FlatStyle.Flat;
+
+            cmb.DefaultCellStyle.NullValue = "IO";
+
         }
 
         /// <summary>
@@ -666,7 +674,7 @@ namespace TestReportGenerator
                         for (int i = dataGridView2.RowCount - 1; i >= 0; i--)
                         {
                             content = content.Insert(dtcStart, "\n" + dataGridView2.Rows[i].Cells[1].Value.ToString() + " & \\" +
-                                                                      dataGridView2.Rows[i].Cells[0].Value.ToString() + " & " +
+                                                                      dataGridView2.Rows[i].Cells[2].Value.ToString() + " & " +
                                                                       dataGridView2.Rows[i].Cells[3].Value.ToString()
                                                                        + @" \\ \hline");
                         }
@@ -688,7 +696,7 @@ namespace TestReportGenerator
                     {
                         for (int i = dataGridView2.RowCount - 1; i >= 0; i--)
                         {
-                            content = content.Insert(dtcStart, "\n" + @"\newcommand{" +
+                            content = content.Insert(dtcStart, "\n" + @"\newcommand{\" +
                                                                dataGridView2.Rows[i].Cells[0].Value.ToString() + "}{" +
                                                                dataGridView2.Rows[i].Cells[2].Value.ToString() + "}");
                         }
