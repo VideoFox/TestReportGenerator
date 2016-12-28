@@ -111,11 +111,11 @@ namespace TestReportGenerator
 
                     value = Convert.ToDouble(arrStrings[4]) > Convert.ToDouble(VDDcore2) ? "1" : "0";
                     if (arrStrings[4] == "-1") value = "1";
-                    dataGridView1.Rows[j].Cells[y+1].Value = value;
+                    dataGridView1.Rows[j].Cells[y + 1].Value = value;
 
                     value = Convert.ToDouble(arrStrings[4]) > Convert.ToDouble(VDDcore3) ? "1" : "0";
                     if (arrStrings[4] == "-1") value = "1";
-                    dataGridView1.Rows[j].Cells[y+2].Value = value;
+                    dataGridView1.Rows[j].Cells[y + 2].Value = value;
                 }
                 y += 3;
             }
@@ -127,7 +127,35 @@ namespace TestReportGenerator
             {
                 dataGridView1.Columns.RemoveAt(i);
             }
-            
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Путь для сохранения отчета по умолчанию
+            string programFiles = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            using (var folderDialog = new FolderBrowserDialog())
+            {
+                folderDialog.SelectedPath = programFiles;
+                if (folderDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string nameReport = "ChipID_MPWID_LotID_Waffer " +  DateTime.Now.ToString("yyyy_MM_dd_hh.m.s")+".txt";
+
+                    string[] lines = new string[dataGridView1.RowCount];
+
+                    for (int i = 0; i < dataGridView1.RowCount; i++)
+                    {
+                        lines[i] = "";
+                        for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                        {
+                            lines[i] += dataGridView1.Rows[i].Cells[j].Value + "\t";
+                        }
+                    }
+
+                    System.IO.File.WriteAllLines(folderDialog.SelectedPath+"\\"+ nameReport, lines);
+
+                }
+            }
         }
     }
 }

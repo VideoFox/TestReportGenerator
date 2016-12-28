@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 // ReSharper disable All
@@ -23,6 +24,9 @@ namespace TestReportGenerator
         public static string VDDcore2;
         public static string VDDcore3;
 
+        private string pathFile;
+        private string testerPath;
+
         // Диалог сохранения
         readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
@@ -39,7 +43,10 @@ namespace TestReportGenerator
             cmb.FlatStyle = FlatStyle.Flat;
 
             cmb.DefaultCellStyle.NullValue = "IO";
-
+            // Чтение путей к директории
+            pathFile = ConfigSettings.ReadSetting("AppPath");
+            testerPath= ConfigSettings.ReadSetting("TesterPath");
+            
         }
 
         /// <summary>
@@ -50,7 +57,7 @@ namespace TestReportGenerator
             // Создание экземпляра диалога открытия
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                InitialDirectory = "D:\\",
+                InitialDirectory = testerPath,
                 Filter = @"txt files (*.txt)|*.txt|All files (*.*)|*.*",
                 FilterIndex = 1,
                 RestoreDirectory = true
@@ -62,6 +69,10 @@ namespace TestReportGenerator
             {
                 // Поток для текста
                 FileStream file = (FileStream)openFileDialog.OpenFile();
+
+                // Запись пути к директории
+                ConfigSettings.WriteSetting("TesterPath", Path.GetDirectoryName(file.Name));
+
                 using (file)
                 {
                     // Создаем поток для чтения данных из файла.
@@ -113,8 +124,8 @@ namespace TestReportGenerator
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             List<XMLrec> ents = new List<XMLrec>();
-
-            fileDialog.InitialDirectory = "c:\\";
+            
+            fileDialog.InitialDirectory = pathFile;
             fileDialog.Filter = @"rgf files (*.rgf)|*.rgf|All files (*.*)|*.*";
             fileDialog.FilterIndex = 1;
             fileDialog.RestoreDirectory = true;
@@ -124,6 +135,9 @@ namespace TestReportGenerator
                 try
                 {
                     nameFile = fileDialog.FileName;
+                    // Запись пути к директории
+                    ConfigSettings.WriteSetting("AppPath", Path.GetDirectoryName(nameFile));
+
                     ents = ClassLibrary.ReadXML(nameFile, "TextReportGenerator", "TextReportGeneratorData");
                 }
                 catch (Exception ex)
@@ -231,10 +245,10 @@ namespace TestReportGenerator
                     if (funcTestConfigig.Count != 0)
                     {
                         int j = 0;
-                        for (int i = 0; i < funcTestConfigig.Count / 2; i++)
+                        for (int i = 0; i < funcTestConfigig.Count / 3; i++)
                         {
-                            dataGridView4.Rows.Add(funcTestConfigig[j].textElement, funcTestConfigig[j + 1].textElement);
-                            j += 2;
+                            dataGridView4.Rows.Add(funcTestConfigig[j].textElement, funcTestConfigig[j + 1].textElement, funcTestConfigig[j + 2].textElement);
+                            j += 3;
                         }
                     }
 
@@ -617,29 +631,43 @@ namespace TestReportGenerator
                         contentConfig = contentConfig.Replace("$Tech$", techString);
                     if (!string.IsNullOrEmpty(mosString))
                         contentConfig = contentConfig.Replace("$MOS$", mosString);
+       
+                    string tbox = tbox1.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$ChipID$", tbox);
+                    tbox = tbox2.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$MPWID$", tbox);
 
-                    contentConfig = contentConfig.Replace("$ChipID$", tbox1.Text);
-                    contentConfig = contentConfig.Replace("$MPWID$", tbox2.Text);
-                    contentConfig = contentConfig.Replace("$BatchID$", tbox3.Text);
-                    contentConfig = contentConfig.Replace("$LotID$", tbox4.Text);
-                    contentConfig = contentConfig.Replace("$Process$", tbox5.Text);
-                    contentConfig = contentConfig.Replace("$IOLib$", tbox6.Text);
-                    contentConfig = contentConfig.Replace("$CoreLib$", tbox7.Text);
-                    contentConfig = contentConfig.Replace("$Packaging$", tbox9.Text);
-                    contentConfig = contentConfig.Replace("$TestType$", tbox10.Text);
-                    contentConfig = contentConfig.Replace("$Wafer$", tbox11.Text);
-                    contentConfig = contentConfig.Replace("$Dies$", tbox12.Text);
-                    contentConfig = contentConfig.Replace("$Author$", tbox13.Text);
-                    contentConfig = contentConfig.Replace("$Measured$", tbox14.Text);
-                    contentConfig = contentConfig.Replace("$Email$", tbox23.Text);
-                    contentConfig = contentConfig.Replace("$Version$", tbox16.Text);
+                    tbox = tbox3.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$BatchID$", tbox);
+                    tbox = tbox4.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$LotID$", tbox);
+                    tbox = tbox5.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$Process$", tbox);
+                    tbox = tbox6.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$IOLib$", tbox);
+                    tbox = tbox7.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$CoreLib$", tbox);
+                    tbox = tbox9.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$Packaging$", tbox);
+                    tbox = tbox10.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$TestType$", tbox);
+                    tbox = tbox11.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$Wafer$", tbox);
+                    tbox = tbox12.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$Dies$", tbox);
+                    tbox = tbox13.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$Author$", tbox);
+                    tbox = tbox14.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$Measured$", tbox);
+                    tbox = tbox23.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$Email$", tbox);
+                    tbox = tbox16.Text.Replace("_", @"\_");
+                    contentConfig = contentConfig.Replace("$Version$", tbox);
 
                     StreamWriter writerConfig = new StreamWriter(nameNewFolder + "\\config.tex");
                     writerConfig.Write(contentConfig);
                     writerConfig.Close();
-
-
-
+                    
                     // Заполнение DTC description
                     StreamReader reader = new StreamReader(nameNewFolder + "\\main.tex");
                     string content = reader.ReadToEnd();
@@ -651,8 +679,10 @@ namespace TestReportGenerator
                     {
                         for (int i = dataGridView1.RowCount - 1; i >= 0; i--)
                         {
-                            content = content.Insert(dtcStart, "\n\\item " + dataGridView1.Rows[i].Cells[0].Value.ToString() + " "
-                                                                           + dataGridView1.Rows[i].Cells[1].Value.ToString());
+                            string txt1 = dataGridView1.Rows[i].Cells[0].Value.ToString().Replace("_", @"\_");
+                            string txt2 = dataGridView1.Rows[i].Cells[1].Value.ToString().Replace("_", @"\_");
+
+                            content = content.Insert(dtcStart, "\n\\item " + txt1 + " " + txt2);
                         }
                     }
                     // Заполнение тест паттерна
@@ -662,8 +692,10 @@ namespace TestReportGenerator
                     {
                         for (int i = dataGridView3.RowCount - 1; i >= 0; i--)
                         {
-                            content = content.Insert(dtcStart, "\n\\item " + dataGridView3.Rows[i].Cells[0].Value.ToString() + " "
-                                                                           + dataGridView3.Rows[i].Cells[1].Value.ToString());
+                            string txt1 = dataGridView3.Rows[i].Cells[0].Value.ToString().Replace("_", @"\_");
+                            string txt2 = dataGridView3.Rows[i].Cells[1].Value.ToString().Replace("_", @"\_");
+
+                            content = content.Insert(dtcStart, "\n\\item " + txt1 + " " + txt2);
                         }
                     }
                     // Заполнение supply pins
@@ -673,10 +705,11 @@ namespace TestReportGenerator
                     {
                         for (int i = dataGridView2.RowCount - 1; i >= 0; i--)
                         {
-                            content = content.Insert(dtcStart, "\n" + dataGridView2.Rows[i].Cells[1].Value.ToString() + " & \\" +
-                                                                      dataGridView2.Rows[i].Cells[2].Value.ToString() + " & " +
-                                                                      dataGridView2.Rows[i].Cells[3].Value.ToString()
-                                                                       + @" \\ \hline");
+                            string txt1= dataGridView2.Rows[i].Cells[1].Value.ToString().Replace("_", @"\_");
+                            string txt2 = dataGridView2.Rows[i].Cells[2].Value.ToString().Replace("_", @"\_");
+                            string txt3 = dataGridView2.Rows[i].Cells[3].Value.ToString().Replace("_", @"\_");
+
+                            content = content.Insert(dtcStart, "\n" + txt1 + " & \\" + txt2 + " & " + txt3 + @" \\ \hline");
                         }
                     }
 
@@ -696,9 +729,10 @@ namespace TestReportGenerator
                     {
                         for (int i = dataGridView2.RowCount - 1; i >= 0; i--)
                         {
-                            content = content.Insert(dtcStart, "\n" + @"\newcommand{\" +
-                                                               dataGridView2.Rows[i].Cells[0].Value.ToString() + "}{" +
-                                                               dataGridView2.Rows[i].Cells[2].Value.ToString() + "}");
+                            string txt1 = dataGridView2.Rows[i].Cells[0].Value.ToString().Replace("_", @"\_");
+                            string txt2 = dataGridView2.Rows[i].Cells[2].Value.ToString().Replace("_", @"\_");
+
+                            content = content.Insert(dtcStart, "\n" + @"\newcommand{\" + txt1 + "}{" + txt2 + "}");
                         }
                     }
 
@@ -739,7 +773,19 @@ namespace TestReportGenerator
                         }
                         if (tempList.Count != 0)
                         {
-                            testerSortCollections.Add(tempList);
+                            // Сортировка данных по Die
+                            var tempLstSort = from elem in tempList
+                                orderby Convert.ToInt32(elem[1])
+                                select  elem
+                            ;
+                            List<string[]> tempListSort = new List<string[]>();
+                            foreach (var itm in tempLstSort)
+                            {
+                                tempListSort.Add(itm);
+                            }
+
+                            // Добавляем отсортированную коллекцию
+                            testerSortCollections.Add(tempListSort);
                         }
                         tempList = new List<string[]>();
                     }
@@ -750,6 +796,9 @@ namespace TestReportGenerator
                 MessageBox.Show("Данные с тестера не загружены!");
                 return;
             }
+
+
+
 
             // Проверка на правильность VDD core
             VDDcore1 = tbox20.Text;
