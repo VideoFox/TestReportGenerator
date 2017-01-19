@@ -2,7 +2,7 @@
   <TextReportGeneratorData>
     <Title>
       <ChipID>CHIIIP IDDDDD</ChipID>
-      <MWPID>2</MWPID>
+      <MWPID>2_6_6_6</MWPID>
       <BatchID>3</BatchID>
       <LotID>4</LotID>
       <Process>5 rty rtyrty xp018 </Process>
@@ -21,10 +21,13 @@
       <VDD_IO-1>17</VDD_IO-1>
       <VDD_IO-2>18</VDD_IO-2>
       <VDD_IO-3>19</VDD_IO-3>
-      <VDD_Core-1>20</VDD_Core-1>
-      <VDD_Core-2>21</VDD_Core-2>
-      <VDD_Core-3>22</VDD_Core-3>
+      <VDD_Core-1>1,62</VDD_Core-1>
+      <VDD_Core-2>1,8</VDD_Core-2>
+      <VDD_Core-3>1,98</VDD_Core-3>
     </Title>
+    <Path>
+      <LastFile>G:\Work\_GitHub\KryloffProject\3333333.rgf</LastFile>
+    </Path>
     <DTCdescription>
       <DTCdescription_1>111</DTCdescription_1>
       <DTCdescription_2>112</DTCdescription_2>
@@ -37,13 +40,22 @@
       <SupplyPins_1>1111</SupplyPins_1>
       <SupplyPins_2>2222</SupplyPins_2>
       <SupplyPins_3>3333</SupplyPins_3>
-      <SupplyPins_4>
-      </SupplyPins_4>
-      <SupplyPins_5>4444</SupplyPins_5>
-      <SupplyPins_6>5555</SupplyPins_6>
-      <SupplyPins_7>6666</SupplyPins_7>
-      <SupplyPins_8>
-      </SupplyPins_8>
+      <SupplyPins_4>1111</SupplyPins_4>
+      <SupplyPins_5>Memory</SupplyPins_5>
+      <SupplyPins_6>
+      </SupplyPins_6>
+      <SupplyPins_7>
+      </SupplyPins_7>
+      <SupplyPins_8>4444</SupplyPins_8>
+      <SupplyPins_9>5555</SupplyPins_9>
+      <SupplyPins_10>Core</SupplyPins_10>
+      <SupplyPins_11>6666</SupplyPins_11>
+      <SupplyPins_12>
+      </SupplyPins_12>
+      <SupplyPins_13>477777</SupplyPins_13>
+      <SupplyPins_14>
+      </SupplyPins_14>
+      <SupplyPins_15>Core</SupplyPins_15>
     </SupplyPins>
     <TextPatterns>
       <TextPatterns_1>кен</TextPatterns_1>
@@ -56,18 +68,35 @@
     <FunctionalTestConfig>
       <FunctionalTestConfig_1>IOTEST</FunctionalTestConfig_1>
       <FunctionalTestConfig_2>IO_TEST_Bya</FunctionalTestConfig_2>
-      <FunctionalTestConfig_3>NANDTREE</FunctionalTestConfig_3>
-      <FunctionalTestConfig_4>NANDTREE_RRRRR</FunctionalTestConfig_4>
+      <FunctionalTestConfig_3>0</FunctionalTestConfig_3>
+      <FunctionalTestConfig_4>NANDTREE</FunctionalTestConfig_4>
+      <FunctionalTestConfig_5>NANDTREE_RRRRR</FunctionalTestConfig_5>
+      <FunctionalTestConfig_6>0</FunctionalTestConfig_6>
+      <FunctionalTestConfig_7>DPRAM4KX64DATA</FunctionalTestConfig_7>
+      <FunctionalTestConfig_8>DPRAM4KX64DATA укеукеуке</FunctionalTestConfig_8>
+      <FunctionalTestConfig_9>1</FunctionalTestConfig_9>
+      <FunctionalTestConfig_10>DPRAM4KX64MARCHC</FunctionalTestConfig_10>
+      <FunctionalTestConfig_11>DPRAM4KX64MARCHC апвапва</FunctionalTestConfig_11>
+      <FunctionalTestConfig_12>11</FunctionalTestConfig_12>
+      <FunctionalTestConfig_13>DPRAM4KX64RETFUNK</FunctionalTestConfig_13>
+      <FunctionalTestConfig_14>DPRAM4KX64RETFUNK fgh fgh</FunctionalTestConfig_14>
+      <FunctionalTestConfig_15>12</FunctionalTestConfig_15>
+      <FunctionalTestConfig_16>ROM8KX64DATA</FunctionalTestConfig_16>
+      <FunctionalTestConfig_17>ROM8KX64DATArtyrty rty</FunctionalTestConfig_17>
+      <FunctionalTestConfig_18>2</FunctionalTestConfig_18>
+      <FunctionalTestConfig_19>ROM8KX64READ</FunctionalTestConfig_19>
+      <FunctionalTestConfig_20>ROM8KX64READ fnfhnf</FunctionalTestConfig_20>
+      <FunctionalTestConfig_21>21</FunctionalTestConfig_21>
     </FunctionalTestConfig>
     <SimulationResult>
       <SimulationResult_1>768</SimulationResult_1>
       <SimulationResult_2>678678</SimulationResult_2>
-      <SimulationResult_3>678678</SimulationResult_3>
+      <SimulationResult_3>678678hghjgh</SimulationResult_3>
       <SimulationResult_4>678678</SimulationResult_4>
       <SimulationResult_5>
       </SimulationResult_5>
       <SimulationResult_6>890890890</SimulationResult_6>
-      <SimulationResult_7>890890</SimulationResult_7>
+      <SimulationResult_7>ggg</SimulationResult_7>
       <SimulationResult_8>890890</SimulationResult_8>
       <SimulationResult_9>
       </SimulationResult_9>
@@ -75,8 +104,5 @@
       <SimulationResult_11>890890</SimulationResult_11>
       <SimulationResult_12>890890</SimulationResult_12>
     </SimulationResult>
-    <Path>
-      <LastFile>C:\1111111.rgf</LastFile>
-    </Path>
   </TextReportGeneratorData>
 </TextReportGenerator>
