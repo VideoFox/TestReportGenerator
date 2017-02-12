@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 // ReSharper disable All
 
@@ -19,6 +17,8 @@ namespace TestReportGenerator
         public static List<List<string[]>> testerSortCollections = new List<List<string[]>>();
         // Коллекция алиасов
         public static List<string> textAliases = new List<string>();
+        // Коллекция уровней текстовых алиасов
+        public static Dictionary<string,string> LevelDictionary { get; set; }
         // VDD core
         public static string VDDcore1;
         public static string VDDcore2;
@@ -78,7 +78,6 @@ namespace TestReportGenerator
                     // Создаем поток для чтения данных из файла.
                     using (StreamReader sr = new StreamReader(file))
                     {
-
                         string line;
                         while ((line = sr.ReadLine()) != null)
                         {
@@ -751,6 +750,7 @@ namespace TestReportGenerator
         {
             testerSortCollections.Clear();
             textAliases.Clear();
+            LevelDictionary=new Dictionary<string, string>();
             // Составление коллекции по тесталиасам
             if (arrayString.Count != 0)
             {
@@ -759,6 +759,9 @@ namespace TestReportGenerator
                     for (int i = 0; i < dataGridView4.RowCount; i++)
                     {
                         textAliases.Add(dataGridView4.Rows[i].Cells[0].Value.ToString());
+                        // Заполнение коллекции уровней
+                        LevelDictionary.Add(dataGridView4.Rows[i].Cells[0].Value.ToString(),
+                                            dataGridView4.Rows[i].Cells[2].Value.ToString());
                     }
                     foreach (var item in textAliases)
                     {

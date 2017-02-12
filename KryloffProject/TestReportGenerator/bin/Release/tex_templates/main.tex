@@ -1,0 +1,229 @@
+
+\input{preamble.tex}
+\input{config.tex}
+\input{legends_and_colors.tex}
+
+
+\begin{document}
+
+\input{title.tex}
+
+%Version_Page
+\newpage
+\raggedright
+\Large {\bf Version History}
+\center{
+\normalsize
+%\begin{tabular}{|p{1.86cm}|p{2.37cm}|p{7.73cm}|p{4.29cm}|}
+\begin{tabularx}{\textwidth}{|l|l|X|l|}
+\hline
+%\rowcolor{Gray}
+ Version  &  Date &   Description &  Author  \\ 
+\hline
+ \version & \today & Initial version & Alexander Krylov \\
+\hline
+\end{tabularx}
+}
+\normalsize
+
+\newpage
+\raggedright
+\tableofcontents
+\newpage
+\pagestyle{fancy}
+\fancypagestyle{plain}
+
+\chapter{DTC description}
+
+Please refer to:
+\begin{itemize}
+%Start DTC description
+%End DTC description
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\jj
+\newpage
+\section{Supply pins}
+
+ \vskip -5mm
+\begin{table}[htbp]
+\captionof{DTC  \CHIPID\ power supply pins.}
+\label{tabular:pins} 
+\begin{center}
+\vskip 5mm
+\begin{tabularx}{\textwidth}{|r|r|X|}
+\hline
+Pin No. & Supply name & Description \\ \hline
+%Start supply pins
+%End supply pins 
+
+
+\end{tabularx}
+\end{center}
+\end{table}
+
+
+
+ \vskip -5mm
+\begin{table}[htbp]
+\begin{center}
+\caption{ \label{pingroups}Supply pin groups.} 
+~\\
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+ VDD: & VRAM, VDIG \\
+\hline
+%VRAM: & \VDDMEMORYIVPIN \\
+%\hline
+VRAM: & \VDDMEMORYIPIN, \VDDMEMORYIIPIN, \VDDMEMORYIIIPIN \\
+\hline
+VDIG: & \VDDCOREPIN, \VDDPADPIN, \VDDSEP, \VDDNA \\
+\hline
+VDIO:& \VDDOPIN, \VDDRPIN \\
+\hline
+%VGND:& \GNDSEP \\
+%\hline
+\end{tabularx}
+\end{center}
+
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{Bonding diagram}
+
+\vskip -5mm
+\begin{figure}[h!]
+%\caption{\bf DTC top level block diagram:}
+\caption{ Bonding diagram \CHIPID}
+\vskip -7mm
+\label{toplevel}
+\center{\includegraphics[scale=0.67]{bonding.pdf}} %%%%%%%%%% BONDING
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Test description}
+
+%\vskip -5pt
+\section{Test patterns}
+
+Please refer to:
+\begin{itemize}
+%Start test patterns
+%End test patterns
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Test hardware}
+
+\begin{itemize}
+\item Semi-automatic wafer prober Suss MicroTec PA200
+\item Modular test system Konrad Technologies FINN-7500 equipped with IMMS PMU32, Konrad Technologies DIG50IO, and three High Speed Digital IO PXI-6552 plug-in cards. 
+\item Probe card HTT “SSMB96” Rev. 3.1 and the needle carrier “DTC\_018”.
+%\item Digital oscilloscope Agilent DSO6104A.
+\end{itemize}
+
+\section{Test software}
+\begin{itemize}
+\item Main DTC test program: “\CHIPID.vi” rev.1.0
+\item Program for creating patterns: “IORead.vi” rev.6.3 
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Color meaning in tables}
+
+Green text means that measured values are inside the simulation range and red means that they are outside. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Functional test}
+
+%ПРОБЛЕМЫ С IO ЯЧЕЙКАМИ
+\renewcommand{\VDIO}{3.3}
+\textcolor{red}{Problems with IO cells. Functionality measured with VDIO=3.3V.}
+%ПРОБЛЕМЫ С IO ЯЧЕЙКАМИ
+
+\input{funk_1.62.tex}
+\newpage
+\input{funk_1.8.tex}
+\newpage
+\input{funk_1.98.tex}
+\newpage
+
+%ПРОБЛЕМЫ С IO ЯЧЕЙКАМИ
+\renewcommand{\VDIO}{5}
+%ПРОБЛЕМЫ С IO ЯЧЕЙКАМИ
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Parameter test: IDDQ}
+
+\input{yield.tex}
+ 
+\newpage 
+\section{IDDQ IO block}
+\input{o.tex}
+
+\newpage
+\input{r.tex}
+
+\newpage
+\input{p.tex}
+
+
+\newpage
+\section{IDDQ Core logic block}
+\input{na2ab.tex}
+
+\newpage
+\input{na2!a!b.tex}
+
+\newpage
+\input{vsep.tex}
+
+\newpage
+\input{v.tex}
+
+
+\newpage
+\section{IDDQ memory block}
+\input{2k.tex}
+
+\newpage
+\input{2klsm.tex}
+
+\newpage
+\input{256.tex}
+
+\newpage
+\input{256lsm.tex}
+
+\newpage
+\input{4k.tex}
+
+\newpage
+\input{voltages.tex}
+
+%ПРОБЛЕМЫ С IO ЯЧЕЙКАМИ
+\renewcommand{\VDIO}{5}
+%ПРОБЛЕМЫ С IO ЯЧЕЙКАМИ
+
+
+%\input{VOLTAGES.tex}
+\newpage
+\input{procmon.tex}
+
+\newpage
+\input{procmonhd.tex}
+
+%%%%%%%%%%%%%%%%
+
+\end {document}

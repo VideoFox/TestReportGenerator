@@ -1,0 +1,11 @@
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\bin\Release\TestReportGenerator.exe.config
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\bin\Release\TestReportGenerator.exe
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\bin\Release\TestReportGenerator.pdb
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\obj\Release\TestReportGenerator.AboutBox1.resources
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\obj\Release\TestReportGenerator.mForm.resources
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\obj\Release\TestReportGenerator.FuncCalc.resources
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\obj\Release\TestReportGenerator.Properties.Resources.resources
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\obj\Release\TestReportGenerator.csproj.GenerateResource.Cache
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\obj\Release\TestReportGenerator.exe
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\obj\Release\TestReportGenerator.pdb
+G:\Work\_GitHub\KryloffProject\TestReportGenerator\obj\Release\TestReportGenerator.csprojResolveAssemblyReference.cache
